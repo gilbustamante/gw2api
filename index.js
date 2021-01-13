@@ -1,11 +1,20 @@
 const express = require('express');
 const app = express();
-const ejs = require('ejs');
 const path = require('path');
+const axios = require('axios').default;
 const ejsMate = require('ejs-mate');
 
-app.get('/', (req, res) => {
-  res.render('index');
+app.get('/', async (req, res) => {
+  let daily;
+  try {
+    const response = await axios.get('https://api.guildwars2.com/v2/achievements/daily')
+    const dailyId = response.data.pve[0].id;
+    daily = await axios.get(`https://api.guildwars2.com/v2/achievements?ids=${dailyId}`)
+    console.log(daily.data[0])
+  } catch (err) {
+    console.log(err)
+  }
+  res.render('index', { daily: daily.data[0] });
 });
 
 app.engine('ejs', ejsMate);
