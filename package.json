@@ -1,0 +1,22 @@
+{
+  "name": "gw2api",
+  "version": "1.0.0",
+  "description": "Guild Wars 2 API Test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gilbustamante/gw2api.git"
+  },
+  "author": "Gil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gilbustamante/gw2api/issues"
+  },
+  "homepage": "https://github.com/gilbustamante/gw2api#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
