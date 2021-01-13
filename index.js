@@ -6,15 +6,20 @@ const ejsMate = require('ejs-mate');
 
 app.get('/', async (req, res) => {
   let daily;
+  let quests;
+  let questIds = [];
   try {
     const response = await axios.get('https://api.guildwars2.com/v2/achievements/daily')
-    const dailyId = response.data.pve[0].id;
-    daily = await axios.get(`https://api.guildwars2.com/v2/achievements?ids=${dailyId}`)
-    console.log(daily.data[0])
+    for (let questId of response.data.pve) {
+      questIds.push(questId.id);
+    }
+    daily = await axios.get(`https://api.guildwars2.com/v2/achievements?ids=${questIds.join()}`)
+    quests = daily.data;
+    console.log(quests[0].tiers.count)
   } catch (err) {
     console.log(err)
   }
-  res.render('index', { daily: daily.data[0] });
+  res.render('index', { quests });
 });
 
 app.engine('ejs', ejsMate);

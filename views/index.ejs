@@ -1,3 +1,13 @@
-<h1>Index</h1>
-<p><%= daily.name %></p>
-<p><%= daily.requirement %></p>
+<%- layout('layouts/boilerplate') %>
+<h1>Daily Quests</h1>
+<% for (let quest of quests) { %>
+  <div class="">
+    <p>
+      <strong>Quest: <%= quest.name %></strong>
+      <br>
+      <%= quest.requirement %> 
+      <br>
+      Progress: <%= quest.tiers[0].points %>/<%= quest.tiers[0].count %>
+    </p>
+  </div>
+<% } %> 
