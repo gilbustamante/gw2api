@@ -40,11 +40,23 @@ app.get('/daily', async (req, res) => {
     quests = daily.data;
 
     // Tomorrow's daily achievements
-    const tomorrowResponse = await axios.get('https://api.guildwars2.com/v2/achievements/daily/tomorrow')
+    const tomorrowResponse = await axios.get('https://api.guildwars2.com/v2/achievements/daily/tomorrow?v=2019-05-16T00:00:00.000Z')
     
-    // Add daily IDs to tomorrowIds array
-    for (let questId of tomorrowResponse.data.pve) {
-      tomorrowIds.push(questId.id);
+    // Add all daily IDs to questIds array
+    for (let tomorrowId of tomorrowResponse.data.pve) {
+      // If it's a low level quest, ignore
+      if (tomorrowId.level.max < 80) { continue; }
+
+      // If it's meant for non PoF users, ignore
+      if (tomorrowId.required_access) {
+        if (tomorrowId.required_access.condition === 'NoAccess') {
+          continue;
+        } else {
+          tomorrowIds.push(tomorrowId.id);
+          continue;
+        }
+      }
+      tomorrowIds.push(tomorrowId.id);
     }
 
     // Get daily names from IDs
