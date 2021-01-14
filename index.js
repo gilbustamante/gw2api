@@ -10,16 +10,28 @@ app.get('/', (req, res) => {
 
 app.get('/daily', async (req, res) => {
   let daily,
-      quests,
+      quests = [],
       questIds = [],
-      tomorrowQuests,
+      tomorrowQuests = [],
       tomorrowIds = [];
   try {
     // Current daily achievements
-    const currentResponse = await axios.get('https://api.guildwars2.com/v2/achievements/daily')
+    const currentResponse = await axios.get('https://api.guildwars2.com/v2/achievements/daily?v=2019-05-16T00:00:00.000Z')
 
     // Add all daily IDs to questIds array
     for (let questId of currentResponse.data.pve) {
+      // If it's a low level quest, ignore
+      if (questId.level.max < 80) { continue; }
+
+      // If it's meant for non PoF users, ignore
+      if (questId.required_access) {
+        if (questId.required_access.condition === 'NoAccess') {
+          continue;
+        } else {
+          questIds.push(questId.id);
+          continue;
+        }
+      }
       questIds.push(questId.id);
     }
 
