@@ -1,6 +1,6 @@
 <%- layout('layouts/boilerplate') %>
 <h2>Daily Achievements</h2>
-<small>Note: These are only applicable to Path of Fire owners.</small>
+<small>Note: These are only applicable to level 80 Path of Fire owners.</small>
 <ul class="list-group-flush mb-3">
   <% for (let quest of quests) { %>
     <li class="list-group-item">
@@ -11,7 +11,10 @@
   <% } %> 
 </ul>
 
+<h3 class="text-center"><a href="https://wiki.guildwars2.com/wiki/Daily/easy_dailies">Easy Daily List</a></h3>
+
 <h2>Tomorrow's Daily Achievements</h2>
+<small>Note: These are only applicable to level 80 Path of Fire owners.</small>
 <ul class="list-group-flush mb-3">
   <% for (let quest of tomorrowQuests) { %>
     <li class="list-group-item text-muted">
