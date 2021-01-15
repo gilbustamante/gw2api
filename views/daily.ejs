@@ -1,31 +1,26 @@
 <%- layout('layouts/boilerplate') %>
-<div class="spinner-border" id="spinner" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<main style="display: none;" id="body">
-  <h2>Daily Achievements</h2>
-  <small>Note: These are only applicable to level 80 Path of Fire owners.</small>
-  <ul class="list-group-flush mb-3">
-    <% for (let quest of quests) { %>
-      <li class="list-group-item">
-        <strong><%= quest.name %></strong>
-        <br>
-        <%= quest.requirement %> 
-      </li>
-    <% } %> 
-  </ul>
+<h2>Daily Achievements</h2>
+<small>Note: These are only applicable to level 80 Path of Fire owners.</small>
+<ul class="list-group-flush mb-3">
+  <% for (let quest of quests) { %>
+    <li class="list-group-item">
+      <strong><%= quest.name %></strong>
+      <br>
+      <%= quest.requirement %> 
+    </li>
+  <% } %> 
+</ul>
 
-  <h3 class="text-center"><a href="https://wiki.guildwars2.com/wiki/Daily/easy_dailies">Easy Daily List</a></h3>
+<h3 class="text-center"><a href="https://wiki.guildwars2.com/wiki/Daily/easy_dailies">Easy Daily List</a></h3>
 
-  <h2>Tomorrow's Daily Achievements</h2>
-  <small>Note: These are only applicable to level 80 Path of Fire owners.</small>
-  <ul class="list-group-flush mb-3">
-    <% for (let quest of tomorrowQuests) { %>
-      <li class="list-group-item text-muted">
-        <strong><%= quest.name %></strong>
-        <br>
-        <%= quest.requirement %> 
-      </li>
-    <% } %> 
-  </ul>
-</main>
+<h2>Tomorrow's Daily Achievements</h2>
+<small>Note: These are only applicable to level 80 Path of Fire owners.</small>
+<ul class="list-group-flush mb-3">
+  <% for (let quest of tomorrowQuests) { %>
+    <li class="list-group-item text-muted">
+      <strong><%= quest.name %></strong>
+      <br>
+      <%= quest.requirement %> 
+    </li>
+  <% } %> 
+</ul>
