@@ -1,1 +1,6 @@
 <%- layout('layouts/boilerplate') %>
+<ul>
+  <% for (let id of categories.pve) { %> 
+    <li><%= achievementsDict[id].name %></li>
+  <% } %>
+</ul>

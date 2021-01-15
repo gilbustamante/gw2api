@@ -112,7 +112,6 @@ module.exports.dailyBeta = async (req, res) => {
       achievementsBuffer.push(achievement.id)
       categories.special.push(achievement.id)
     }
-    console.log(categories)
 
     const dailiesDetails = await axios.get(
       dailyLookupUrl + achievementsBuffer.join());
@@ -125,8 +124,13 @@ module.exports.dailyBeta = async (req, res) => {
       const achievementID = achievement.id;
       achievementsDict[achievementID] = achievement;
     }
+
+    console.log(categories)
+    console.log(achievements)
+
+
   } catch (err) {
     console.log(err);
   }
-  res.render('daily')
+  res.render('daily', { achievementsDict, categories });
 }
