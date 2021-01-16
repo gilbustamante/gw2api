@@ -1,4 +1,5 @@
 const axios = require('axios').default;
+const filterAchievements = require('../utils/filterAchievements');
 
 // Make API Call And Display
 // module.exports.displayDailies = async (req, res) => {
@@ -85,8 +86,11 @@ module.exports.dailyBeta = async (req, res) => {
 
     // PvE
     for (let achievement of dailies.pve) {
-      achievementsBuffer.push(achievement.id)
-      categories.pve.push(achievement.id)
+      const id = filterAchievements(achievement)
+      if (id) {
+        achievementsBuffer.push(id)
+        categories.pve.push(id)
+      }
     }
 
     // PvP
@@ -124,10 +128,6 @@ module.exports.dailyBeta = async (req, res) => {
       const achievementID = achievement.id;
       achievementsDict[achievementID] = achievement;
     }
-
-    console.log(categories)
-    console.log(achievements)
-
 
   } catch (err) {
     console.log(err);
