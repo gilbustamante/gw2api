@@ -64,72 +64,140 @@ const filterAchievements = require('../utils/filterAchievements');
 // };
 
 // Globals
-let achievements = {};
-let categories = {};
-let dailies = {};
+// Today
+let todayAchievements = {};
+let todayCategories = {};
+let todayDailies = {};
+// Tomorrow
+let tomorrowAchievements = {};
+let tomorrowCategories = {};
+let tomorrowDailies = {};
 const dailyUrl = 'https://api.guildwars2.com/v2/achievements/daily?v=2019-05-16T00:00:00.000Z';
 const dailyTomorrowUrl = 'https://api.guildwars2.com/v2/achievements/daily/tomorrow?v=2019-05-16T00:00:00.000Z'
 const dailyLookupUrl = 'https://api.guildwars2.com/v2/achievements?ids='
 
 module.exports.dailyBeta = async (req, res) => {
-  let achievementsBuffer = [];
-  categories = {
+  let todayBuffer = [];
+  let tomorrowBuffer = [];
+  todayCategories = {
     'pve': [],
     'pvp': [],
     'wvw': [],
     'fractals': [],
     'special': []
   }
-  try {
-    const result = await axios.get(dailyUrl);
-    dailies = result.data;
 
-    // PvE
-    for (let achievement of dailies.pve) {
+  tomorrowCategories = {
+    'pve': [],
+    'pvp': [],
+    'wvw': [],
+    'fractals': [],
+    'special': []
+  }
+
+  try {
+    // Request Today's Dailies
+    const today = await axios.get(dailyUrl);
+    todayDailies = today.data;
+
+    // Request Tomorrow's Dailies
+    const tomorrow = await axios.get(dailyTomorrowUrl);
+    tomorrowDailies = tomorrow.data;
+
+    // Today - PvE
+    for (let achievement of todayDailies.pve) {
       const id = filterAchievements(achievement)
       if (id) {
-        achievementsBuffer.push(id)
-        categories.pve.push(id)
+        todayBuffer.push(id)
+        todayCategories.pve.push(id)
       }
     }
 
-    // PvP
-    for (let achievement of dailies.pvp) {
-      achievementsBuffer.push(achievement.id)
-      categories.pvp.push(achievement.id)
+    // Today - PvP
+    for (let achievement of todayDailies.pvp) {
+      todayBuffer.push(achievement.id)
+      todayCategories.pvp.push(achievement.id)
     }
 
-    // WvW
-    for (let achievement of dailies.wvw) {
-      achievementsBuffer.push(achievement.id)
-      categories.wvw.push(achievement.id)
+    // Today - WvW
+    for (let achievement of todayDailies.wvw) {
+      todayBuffer.push(achievement.id)
+      todayCategories.wvw.push(achievement.id)
     }
 
-    // Fractals
-    for (let achievement of dailies.fractals) {
-      achievementsBuffer.push(achievement.id)
-      categories.fractals.push(achievement.id)
+    // Today - Fractals
+    for (let achievement of todayDailies.fractals) {
+      todayBuffer.push(achievement.id)
+      todayCategories.fractals.push(achievement.id)
     }
 
-    // Special Events
-    for (let achievement of dailies.special) {
-      achievementsBuffer.push(achievement.id)
-      categories.special.push(achievement.id)
+    // Today - Special Events
+    for (let achievement of todayDailies.special) {
+      todayBuffer.push(achievement.id)
+      todayCategories.special.push(achievement.id)
     }
 
-    const dailiesDetails = await axios.get(
-      dailyLookupUrl + achievementsBuffer.join());
+    // Tomorrow - PvE
+    for (let achievement of tomorrowDailies.pve) {
+      const id = filterAchievements(achievement)
+      if (id) {
+        tomorrowBuffer.push(id)
+        tomorrowCategories.pve.push(id)
+      }
+    }
 
-    achievements = dailiesDetails.data;
+    // Today - PvP
+    for (let achievement of tomorrowDailies.pvp) {
+      tomorrowBuffer.push(achievement.id)
+      tomorrowCategories.pvp.push(achievement.id)
+    }
 
-    // Maybe move this to a function somewhere else
-    achievementsDict = {};
-    for (let achievement of achievements) {
+    // Today - WvW
+    for (let achievement of tomorrowDailies.wvw) {
+      tomorrowBuffer.push(achievement.id)
+      tomorrowCategories.wvw.push(achievement.id)
+    }
+
+    // Today - Fractals
+    for (let achievement of tomorrowDailies.fractals) {
+      tomorrowBuffer.push(achievement.id)
+      tomorrowCategories.fractals.push(achievement.id)
+    }
+
+    // Today - Special Events
+    for (let achievement of tomorrowDailies.special) {
+      tomorrowBuffer.push(achievement.id)
+      tomorrowCategories.special.push(achievement.id)
+    }
+
+    // Lookup Achievement IDs
+    const todayDetails = await axios.get(
+      dailyLookupUrl + todayBuffer.join());
+    const tomorrowDetails = await axios.get(
+      dailyLookupUrl + tomorrowBuffer.join());
+
+    todayAchievements = todayDetails.data;
+    tomorrowAchievements = tomorrowDetails.data;
+
+    todayAchievementsDict = {};
+    for (let achievement of todayAchievements) {
       const achievementID = achievement.id;
-      achievementsDict[achievementID] = achievement;
+      todayAchievementsDict[achievementID] = achievement;
     }
+
+    tomorrowAchievementsDict = {};
+    for (let achievement of tomorrowAchievements) {
+      const achievementID = achievement.id;
+      tomorrowAchievementsDict[achievementID] = achievement;
+    }
+
   } catch (err) {
     console.log(err);
   }
-  res.render('daily', { achievementsDict, categories });
+  res.render('daily', {
+    todayAchievementsDict,
+    tomorrowAchievementsDict,
+    todayCategories,
+    tomorrowCategories
+  });
 }

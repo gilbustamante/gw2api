@@ -1,73 +1,136 @@
 <%- layout('layouts/boilerplate') %>
 <h1>Daily Quests</h1>
-<nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Today</a>
-    <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Tomorrow</a>
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="today" data-bs-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Today</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="tomorrow" data-bs-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Tomorrow</a>
+  </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="today">
+    <div class="py-2 mb-3">
+      <h3 class=""><strong>PvE</strong></h3>
+      <div class="list-group-flush rounded mb-3">
+        <% for (let id of todayCategories.pve) { %> 
+          <li class="list-group-item">
+            <strong><%= todayAchievementsDict[id].name %></strong> 
+            (<%= todayAchievementsDict[id].tiers[0].count %>)
+            <br>
+            <%= todayAchievementsDict[id].requirement %>
+          </li>
+        <% } %>
+      </div>
+      <h3 class=""><strong>PvP</strong></h3>
+      <div class="list-group-flush rounded mb-3">
+        <% for (let id of todayCategories.pvp) { %> 
+          <li class="list-group-item">
+            <strong><%= todayAchievementsDict[id].name %></strong> 
+            (<%= todayAchievementsDict[id].tiers[0].count %>)
+            <br>
+            <%= todayAchievementsDict[id].requirement %>
+          </li>
+        <% } %>
+      </div>
+      <h3 class=""><strong>WvW</strong></h3>
+      <div class="list-group-flush rounded mb-3">
+        <% for (let id of todayCategories.wvw) { %> 
+          <li class="list-group-item">
+            <strong><%= todayAchievementsDict[id].name %></strong> 
+            (<%= todayAchievementsDict[id].tiers[0].count %>)
+            <br>
+            <%= todayAchievementsDict[id].requirement %>
+          </li>
+        <% } %>
+      </div>
+      <h3 class=""><strong>Fractals</strong></h3>
+      <div class="list-group-flush rounded mb-3">
+        <% for (let id of todayCategories.fractals) { %> 
+          <li class="list-group-item">
+            <strong><%= todayAchievementsDict[id].name %></strong> 
+            (<%= todayAchievementsDict[id].tiers[0].count %>)
+            <br>
+            <%= todayAchievementsDict[id].requirement %>
+          </li>
+        <% } %>
+      </div>
+      <h3 class=""><strong>Special Events</strong></h3>
+      <div class="list-group-flush rounded mb-3">
+        <% if (todayCategories.special.length === 0) { %> 
+          <li class="list-group-item">No special event dailies.</li>
+        <% } %>
+        <% for (let id of todayCategories.special) { %> 
+          <li class="list-group-item">
+            <strong><%= todayAchievementsDict[id].name %></strong> 
+            (<%= todayAchievementsDict[id].tiers[0].count %>)
+            <br>
+            <%= todayAchievementsDict[id].requirement %>
+          </li>
+        <% } %>
+      </div>
+    </div>
   </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-  <div class="py-2 mb-3">
-    <h3 class=""><strong>PvE</strong></h3>
-    <div class="list-group-flush rounded mb-3">
-      <% for (let id of categories.pve) { %> 
-        <li class="list-group-item">
-          <strong><%= achievementsDict[id].name %></strong> 
-          (<%= achievementsDict[id].tiers[0].count %>)
-          <br>
-          <%= achievementsDict[id].requirement %>
-        </li>
-      <% } %>
-    </div>
-    <h3 class=""><strong>PvP</strong></h3>
-    <div class="list-group-flush rounded mb-3">
-      <% for (let id of categories.pvp) { %> 
-        <li class="list-group-item">
-          <strong><%= achievementsDict[id].name %></strong> 
-          (<%= achievementsDict[id].tiers[0].count %>)
-          <br>
-          <%= achievementsDict[id].requirement %>
-        </li>
-      <% } %>
-    </div>
-    <h3 class=""><strong>WvW</strong></h3>
-    <div class="list-group-flush rounded mb-3">
-      <% for (let id of categories.wvw) { %> 
-        <li class="list-group-item">
-          <strong><%= achievementsDict[id].name %></strong> 
-          (<%= achievementsDict[id].tiers[0].count %>)
-          <br>
-          <%= achievementsDict[id].requirement %>
-        </li>
-      <% } %>
-    </div>
-    <h3 class=""><strong>Fractals</strong></h3>
-    <div class="list-group-flush rounded mb-3">
-      <% for (let id of categories.fractals) { %> 
-        <li class="list-group-item">
-          <strong><%= achievementsDict[id].name %></strong> 
-          (<%= achievementsDict[id].tiers[0].count %>)
-          <br>
-          <%= achievementsDict[id].requirement %>
-        </li>
-      <% } %>
-    </div>
-    <h3 class=""><strong>Special Events</strong></h3>
-    <div class="list-group-flush rounded mb-3">
-      <% if (categories.special.length === 0) { %> 
-        <li class="list-group-item">No special event dailies.</li>
-      <% } %>
-      <% for (let id of categories.special) { %> 
-        <li class="list-group-item">
-          <strong><%= achievementsDict[id].name %></strong> 
-          (<%= achievementsDict[id].tiers[0].count %>)
-          <br>
-          <%= achievementsDict[id].requirement %>
-        </li>
-      <% } %>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="tomorrow">
+    <div class="py-2 mb-3">
+      <h3 class=""><strong>PvE</strong></h3>
+      <div class="list-group-flush rounded mb-3">
+        <% for (let id of tomorrowCategories.pve) { %> 
+          <li class="list-group-item">
+            <strong><%= tomorrowAchievementsDict[id].name %></strong> 
+            (<%= tomorrowAchievementsDict[id].tiers[0].count %>)
+            <br>
+            <%= tomorrowAchievementsDict[id].requirement %>
+          </li>
+        <% } %>
+      </div>
+      <h3 class=""><strong>PvP</strong></h3>
+      <div class="list-group-flush rounded mb-3">
+        <% for (let id of tomorrowCategories.pvp) { %> 
+          <li class="list-group-item">
+            <strong><%= tomorrowAchievementsDict[id].name %></strong> 
+            (<%= tomorrowAchievementsDict[id].tiers[0].count %>)
+            <br>
+            <%= tomorrowAchievementsDict[id].requirement %>
+          </li>
+        <% } %>
+      </div>
+      <h3 class=""><strong>WvW</strong></h3>
+      <div class="list-group-flush rounded mb-3">
+        <% for (let id of tomorrowCategories.wvw) { %> 
+          <li class="list-group-item">
+            <strong><%= tomorrowAchievementsDict[id].name %></strong> 
+            (<%= tomorrowAchievementsDict[id].tiers[0].count %>)
+            <br>
+            <%= tomorrowAchievementsDict[id].requirement %>
+          </li>
+        <% } %>
+      </div>
+      <h3 class=""><strong>Fractals</strong></h3>
+      <div class="list-group-flush rounded mb-3">
+        <% for (let id of tomorrowCategories.fractals) { %> 
+          <li class="list-group-item">
+            <strong><%= tomorrowAchievementsDict[id].name %></strong> 
+            (<%= tomorrowAchievementsDict[id].tiers[0].count %>)
+            <br>
+            <%= tomorrowAchievementsDict[id].requirement %>
+          </li>
+        <% } %>
+      </div>
+      <h3 class=""><strong>Special Events</strong></h3>
+      <div class="list-group-flush rounded mb-3">
+        <% if (tomorrowCategories.special.length === 0) { %> 
+          <li class="list-group-item">No special event dailies.</li>
+        <% } %>
+        <% for (let id of tomorrowCategories.special) { %> 
+          <li class="list-group-item">
+            <strong><%= tomorrowAchievementsDict[id].name %></strong> 
+            (<%= tomorrowAchievementsDict[id].tiers[0].count %>)
+            <br>
+            <%= tomorrowAchievementsDict[id].requirement %>
+          </li>
+        <% } %>
+      </div>
     </div>
   </div>
-</div>
-  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
 </div>
