@@ -128,7 +128,6 @@ module.exports.dailyBeta = async (req, res) => {
       const achievementID = achievement.id;
       achievementsDict[achievementID] = achievement;
     }
-
   } catch (err) {
     console.log(err);
   }

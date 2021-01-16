@@ -1,28 +1,48 @@
 <%- layout('layouts/boilerplate') %>
 <h2>Today's Dailies</h2>
-<div class="py-2 px-5 mb-3">
+<div class="py-2 mb-3">
   <h4>PvE</h4>
   <ul class="list-group-flush">
     <% for (let id of categories.pve) { %> 
-      <li class="list-group-item"><%= achievementsDict[id].name %></li>
+      <li class="list-group-item">
+        <strong><%= achievementsDict[id].name %></strong> 
+        (<%= achievementsDict[id].tiers[0].count %>)
+        <br>
+        <%= achievementsDict[id].requirement %>
+      </li>
     <% } %>
   </ul>
   <h4>PvP</h4>
   <ul class="list-group-flush">
     <% for (let id of categories.pvp) { %> 
-      <li class="list-group-item"><%= achievementsDict[id].name %></li>
+      <li class="list-group-item">
+        <strong><%= achievementsDict[id].name %></strong> 
+        (<%= achievementsDict[id].tiers[0].count %>)
+        <br>
+        <%= achievementsDict[id].requirement %>
+      </li>
     <% } %>
   </ul>
   <h4>WvW</h4>
   <ul class="list-group-flush">
     <% for (let id of categories.wvw) { %> 
-      <li class="list-group-item"><%= achievementsDict[id].name %></li>
+      <li class="list-group-item">
+        <strong><%= achievementsDict[id].name %></strong> 
+        (<%= achievementsDict[id].tiers[0].count %>)
+        <br>
+        <%= achievementsDict[id].requirement %>
+      </li>
     <% } %>
   </ul>
   <h4>Fractals</h4>
   <ul class="list-group-flush">
     <% for (let id of categories.fractals) { %> 
-      <li class="list-group-item"><%= achievementsDict[id].name %></li>
+      <li class="list-group-item">
+        <strong><%= achievementsDict[id].name %></strong> 
+        (<%= achievementsDict[id].tiers[0].count %>)
+        <br>
+        <%= achievementsDict[id].requirement %>
+      </li>
     <% } %>
   </ul>
   <h4>Special Events</h4>
@@ -31,7 +51,12 @@
       <li class="list-group-item">No special event dailies.</li>
     <% } %>
     <% for (let id of categories.special) { %> 
-      <li class="list-group-item"><%= achievementsDict[id].name %></li>
+      <li class="list-group-item">
+        <strong><%= achievementsDict[id].name %></strong> 
+        (<%= achievementsDict[id].tiers[0].count %>)
+        <br>
+        <%= achievementsDict[id].requirement %>
+      </li>
     <% } %>
   </ul>
 </div>
