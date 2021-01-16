@@ -13,59 +13,59 @@
     <div class="py-2 mb-3">
       <h3 class=""><strong>PvE</strong></h3>
       <div class="list-group-flush rounded mb-3">
-        <% for (let id of todayCategories.pve) { %> 
+        <% for (let id of todayCats.pve) { %> 
           <li class="list-group-item">
-            <strong><%= todayAchievementsDict[id].name %></strong> 
-            (<%= todayAchievementsDict[id].tiers[0].count %>)
+            <strong><%= todayDict[id].name %></strong> 
+            (<%= todayDict[id].tiers[0].count %>)
             <br>
-            <%= todayAchievementsDict[id].requirement %>
+            <%= todayDict[id].requirement %>
           </li>
         <% } %>
       </div>
       <h3 class=""><strong>PvP</strong></h3>
       <div class="list-group-flush rounded mb-3">
-        <% for (let id of todayCategories.pvp) { %> 
+        <% for (let id of todayCats.pvp) { %> 
           <li class="list-group-item">
-            <strong><%= todayAchievementsDict[id].name %></strong> 
-            (<%= todayAchievementsDict[id].tiers[0].count %>)
+            <strong><%= todayDict[id].name %></strong> 
+            (<%= todayDict[id].tiers[0].count %>)
             <br>
-            <%= todayAchievementsDict[id].requirement %>
+            <%= todayDict[id].requirement %>
           </li>
         <% } %>
       </div>
       <h3 class=""><strong>WvW</strong></h3>
       <div class="list-group-flush rounded mb-3">
-        <% for (let id of todayCategories.wvw) { %> 
+        <% for (let id of todayCats.wvw) { %> 
           <li class="list-group-item">
-            <strong><%= todayAchievementsDict[id].name %></strong> 
-            (<%= todayAchievementsDict[id].tiers[0].count %>)
+            <strong><%= todayDict[id].name %></strong> 
+            (<%= todayDict[id].tiers[0].count %>)
             <br>
-            <%= todayAchievementsDict[id].requirement %>
+            <%= todayDict[id].requirement %>
           </li>
         <% } %>
       </div>
       <h3 class=""><strong>Fractals</strong></h3>
       <div class="list-group-flush rounded mb-3">
-        <% for (let id of todayCategories.fractals) { %> 
+        <% for (let id of todayCats.fractals) { %> 
           <li class="list-group-item">
-            <strong><%= todayAchievementsDict[id].name %></strong> 
-            (<%= todayAchievementsDict[id].tiers[0].count %>)
+            <strong><%= todayDict[id].name %></strong> 
+            (<%= todayDict[id].tiers[0].count %>)
             <br>
-            <%= todayAchievementsDict[id].requirement %>
+            <%= todayDict[id].requirement %>
           </li>
         <% } %>
       </div>
       <h3 class=""><strong>Special Events</strong></h3>
       <div class="list-group-flush rounded mb-3">
-        <% if (todayCategories.special.length === 0) { %> 
+        <% if (todayCats.special.length === 0) { %> 
           <li class="list-group-item">No special event dailies.</li>
         <% } %>
-        <% for (let id of todayCategories.special) { %> 
+        <% for (let id of todayCats.special) { %> 
           <li class="list-group-item">
-            <strong><%= todayAchievementsDict[id].name %></strong> 
-            (<%= todayAchievementsDict[id].tiers[0].count %>)
+            <strong><%= todayDict[id].name %></strong> 
+            (<%= todayDict[id].tiers[0].count %>)
             <br>
-            <%= todayAchievementsDict[id].requirement %>
+            <%= todayDict[id].requirement %>
           </li>
         <% } %>
       </div>
@@ -75,59 +75,59 @@
     <div class="py-2 mb-3">
       <h3 class=""><strong>PvE</strong></h3>
       <div class="list-group-flush rounded mb-3">
-        <% for (let id of tomorrowCategories.pve) { %> 
+        <% for (let id of tomorrowCats.pve) { %> 
           <li class="list-group-item">
-            <strong><%= tomorrowAchievementsDict[id].name %></strong> 
-            (<%= tomorrowAchievementsDict[id].tiers[0].count %>)
+            <strong><%= tomorrowDict[id].name %></strong> 
+            (<%= tomorrowDict[id].tiers[0].count %>)
             <br>
-            <%= tomorrowAchievementsDict[id].requirement %>
+            <%= tomorrowDict[id].requirement %>
           </li>
         <% } %>
       </div>
       <h3 class=""><strong>PvP</strong></h3>
       <div class="list-group-flush rounded mb-3">
-        <% for (let id of tomorrowCategories.pvp) { %> 
+        <% for (let id of tomorrowCats.pvp) { %> 
           <li class="list-group-item">
-            <strong><%= tomorrowAchievementsDict[id].name %></strong> 
-            (<%= tomorrowAchievementsDict[id].tiers[0].count %>)
+            <strong><%= tomorrowDict[id].name %></strong> 
+            (<%= tomorrowDict[id].tiers[0].count %>)
             <br>
-            <%= tomorrowAchievementsDict[id].requirement %>
+            <%= tomorrowDict[id].requirement %>
           </li>
         <% } %>
       </div>
       <h3 class=""><strong>WvW</strong></h3>
       <div class="list-group-flush rounded mb-3">
-        <% for (let id of tomorrowCategories.wvw) { %> 
+        <% for (let id of tomorrowCats.wvw) { %> 
           <li class="list-group-item">
-            <strong><%= tomorrowAchievementsDict[id].name %></strong> 
-            (<%= tomorrowAchievementsDict[id].tiers[0].count %>)
+            <strong><%= tomorrowDict[id].name %></strong> 
+            (<%= tomorrowDict[id].tiers[0].count %>)
             <br>
-            <%= tomorrowAchievementsDict[id].requirement %>
+            <%= tomorrowDict[id].requirement %>
           </li>
         <% } %>
       </div>
       <h3 class=""><strong>Fractals</strong></h3>
       <div class="list-group-flush rounded mb-3">
-        <% for (let id of tomorrowCategories.fractals) { %> 
+        <% for (let id of tomorrowCats.fractals) { %> 
           <li class="list-group-item">
-            <strong><%= tomorrowAchievementsDict[id].name %></strong> 
-            (<%= tomorrowAchievementsDict[id].tiers[0].count %>)
+            <strong><%= tomorrowDict[id].name %></strong> 
+            (<%= tomorrowDict[id].tiers[0].count %>)
             <br>
-            <%= tomorrowAchievementsDict[id].requirement %>
+            <%= tomorrowDict[id].requirement %>
           </li>
         <% } %>
       </div>
       <h3 class=""><strong>Special Events</strong></h3>
       <div class="list-group-flush rounded mb-3">
-        <% if (tomorrowCategories.special.length === 0) { %> 
+        <% if (tomorrowCats.special.length === 0) { %> 
           <li class="list-group-item">No special event dailies.</li>
         <% } %>
-        <% for (let id of tomorrowCategories.special) { %> 
+        <% for (let id of tomorrowCats.special) { %> 
           <li class="list-group-item">
-            <strong><%= tomorrowAchievementsDict[id].name %></strong> 
-            (<%= tomorrowAchievementsDict[id].tiers[0].count %>)
+            <strong><%= tomorrowDict[id].name %></strong> 
+            (<%= tomorrowDict[id].tiers[0].count %>)
             <br>
-            <%= tomorrowAchievementsDict[id].requirement %>
+            <%= tomorrowDict[id].requirement %>
           </li>
         <% } %>
       </div>
