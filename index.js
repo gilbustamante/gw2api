@@ -1,11 +1,15 @@
-const express = require('express');
-const app = express();
-const path = require('path');
-const ejsMate = require('ejs-mate');
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
+const express      = require('express');
+const app          = express();
+const path         = require('path');
+const ejsMate      = require('ejs-mate');
 const ExpressError = require('./utils/ExpressError');
 
 // Requiring Routes
-const dailyRoutes = require('./routes/daily');
+const dailyRoutes  = require('./routes/daily');
 const marketRoutes = require('./routes/market');
 
 // Using Routes
