@@ -1,13 +1,7 @@
 <%- layout("layouts/boilerplate") %>
 <h1>Market</h1>
 <ul class="list-group">
-  <% for (let item of items) { %>
-    <li class="list-group-item">
-      Item: <%= item.item_id %>
-      <br>
-      Price: <%= (item.price / 100) %> silver
-      <br>
-      Sold: <%= new Date(item.purchased).toLocaleString("en-US") %>
-    </li>
+  <% for (let item of items) { %> 
+    <li><%= itemsDict[item.item_id].name %></li>
   <% } %> 
 </ul>
