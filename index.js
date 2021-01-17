@@ -5,9 +5,11 @@ const ejsMate = require('ejs-mate');
 
 // Requiring Routes
 const dailyRoutes = require('./routes/daily');
+const marketRoutes = require('./routes/market');
 
 // Using Routes
 app.use('/daily', dailyRoutes);
+app.use('/market', marketRoutes);
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
