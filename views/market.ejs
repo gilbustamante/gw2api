@@ -1,7 +1,23 @@
 <%- layout("layouts/boilerplate") %>
 <h1>Market</h1>
-<ul class="list-group">
-  <% for (let item of items) { %> 
-    <li><%= itemsDict[item.item_id].name %></li>
-  <% } %> 
-</ul>
+<hr>
+<h4>Sold Items</h4>
+<div class="mb-3">
+  <ul class="list-group-flush">
+    <% for (let item of items) { %> 
+      <li class="list-group-item">
+        <strong><%= itemsDict[item.item_id].name %></strong>
+        <br>
+        Price: <%= (item.price / 100) %> silver
+        <br>
+        Sold: <%= new Date(item.purchased).toLocaleString(
+          'en-US',
+          {
+            dateStyle: 'long',
+            timeStyle: 'long'
+          }
+        ) %>
+      </li>
+    <% } %> 
+  </ul>
+</div>
