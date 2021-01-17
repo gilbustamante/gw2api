@@ -18,7 +18,7 @@ const dailyTomorrowUrl = 'https://api.guildwars2.com/v2/achievements/daily/tomor
 // Lookup Quest IDs Endpoint
 const dailyLookupUrl = 'https://api.guildwars2.com/v2/achievements?ids='
 
-module.exports.dailyBeta = async (req, res) => {
+module.exports.renderDailies = async (req, res) => {
   let todayBuffer = [];
   let tomorrowBuffer = [];
   todayCats = {
