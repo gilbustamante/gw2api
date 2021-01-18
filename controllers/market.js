@@ -2,39 +2,68 @@ const axios = require('axios').default;
 
 module.exports.renderMarket = async (req, res) => {
   try {
-    var itemBuffer = [];
-    var itemsDict = {};
-    var items = [];
+    // Sold items
+    var sellBuffer = [];
+    var sellDict = {};
+    var sell = [];
 
-    // Axios Config
+    // Request header config
     const config = {
       headers: {
         Authorization: 'Bearer ' + process.env.API_KEY
       }
     }
     // Request sell history data
-    const marketUrl = 'https://api.guildwars2.com/v2/commerce/transactions/history/sells';
-    const marketRes = await axios.get(marketUrl, config)
+    const sellMarketUrl = 'https://api.guildwars2.com/v2/commerce/transactions/history/sells';
+    const sellMarketRes = await axios.get(sellMarketUrl, config)
 
     // List to iterate over
-    items = marketRes.data;
+    sell = sellMarketRes.data;
 
     // Make a list of item IDs for next request
-    for (let i of marketRes.data) {
-      itemBuffer.push(i.item_id)
+    for (let i of sell) {
+      sellBuffer.push(i.item_id)
     }
 
     // Request item info based on item IDs
-    const itemUrl = 'https://api.guildwars2.com/v2/items?ids='
-    const itemRes = await axios.get(itemUrl + itemBuffer.join())
+    const sellItemUrl = 'https://api.guildwars2.com/v2/items?ids='
+    const sellItemRes = await axios.get(sellItemUrl + sellBuffer.join())
 
     // Create dictionary with item ID keys and item object values
-    for (let i of itemRes.data) {
+    for (let i of sellItemRes.data) {
       const id = i.id;
-      itemsDict[id] = i;
+      sellDict[id] = i;
+    }
+
+    ///////////////////////////////////////////////////////////
+
+    // Bought Items
+    var buyBuffer = [];
+    var buyDict = {};
+    var buy = [];
+
+    const buyMarketUrl = 'https://api.guildwars2.com/v2/commerce/transactions/history/buys';
+    const buyMarketRes = await axios.get(buyMarketUrl, config)
+
+    // List to iterate over
+    buy = buyMarketRes.data;
+
+    // Make a list of item IDs for next request
+    for (let i of buy) {
+      buyBuffer.push(i.item_id)
+    }
+
+    // Request item info based on item IDs
+    // Re-using sellItemUrl
+    const buyItemRes = await axios.get(sellItemUrl + buyBuffer.join())
+
+    // Create dictionary with item ID keys and item object values
+    for (let i of buyItemRes.data) {
+      const id = i.id;
+      buyDict[id] = i;
     }
   } catch (err) {
     console.log(err)
   }
-  res.render('market', { items, itemsDict });
+  res.render('market', { sell, sellDict, buy, buyDict });
 }
