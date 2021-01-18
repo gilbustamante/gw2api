@@ -28,6 +28,11 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+// Add API key
+app.get('/api', (req, res) => {
+  res.render('api');
+});
+
 // 404 Error
 app.all('*', (req, res, next) => {
   next(new ExpressError('Page Not Found', 404));

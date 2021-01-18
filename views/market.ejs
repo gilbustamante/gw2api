@@ -13,7 +13,7 @@
   <div class="tab-pane fade show active" id="pills-sold" role="tabpanel" aria-labelledby="pills-sold-tab">
     <h4>Sold Items</h4>
     <div class="mb-3">
-      <ul class="list-group-flush">
+      <ul class="list-group-flush p-0">
         <% for (let item of sell) { %> 
           <li class="list-group-item">
             <strong><%= sellDict[item.item_id].name %></strong>
@@ -35,7 +35,7 @@
   <div class="tab-pane fade" id="pills-bought" role="tabpanel" aria-labelledby="pills-bought-tab">
     <h4>Bought Items</h4>
     <div class="mb-3">
-      <ul class="list-group-flush">
+      <ul class="list-group-flush p-0">
         <% for (let item of buy) { %> 
           <li class="list-group-item">
             <strong><%= buyDict[item.item_id].name %></strong>
