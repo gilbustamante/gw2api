@@ -1,5 +1,4 @@
 const axios = require('axios').default;
-const filterAchievements = require('../utils/filterAchievements');
 
 //// Globals
 // Today
@@ -145,4 +144,16 @@ module.exports.renderDailies = async (req, res) => {
     todayCats,
     tomorrowCats
   });
+}
+
+const filterAchievements = item => {
+  // If it's a low-level quest, ignore
+  if (item.level.max < 80) { return null }
+  // If it's for non-expansion players, ignore
+  if (item.required_access) {
+    if (item.required_access.condition === 'NoAccess') {
+      return null;
+    }
+  }
+  return item.id;
 }

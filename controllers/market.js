@@ -1,5 +1,7 @@
 const axios = require('axios').default;
 
+// TODO: add validation for apiKey
+
 module.exports.renderMarket = async (req, res) => {
   try {
     // Sold items
@@ -10,7 +12,7 @@ module.exports.renderMarket = async (req, res) => {
     // Request header config
     const config = {
       headers: {
-        Authorization: 'Bearer ' + process.env.API_KEY
+        Authorization: 'Bearer ' + req.signedCookies.apiKey
       }
     }
     // Request sell history data

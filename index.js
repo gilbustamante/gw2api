@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express      = require('express');
 const session      = require('express-session');
+const cookieParser = require('cookie-parser');
 const path         = require('path');
 const ejsMate      = require('ejs-mate');
 const ExpressError = require('./utils/ExpressError');
@@ -20,6 +21,7 @@ app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -37,7 +39,7 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 
-// Flash
+// Flash middleware
 app.use((req, res, next) => {
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
