@@ -11,10 +11,7 @@ const ExpressError = require('./utils/ExpressError');
 // Requiring Routes
 const dailyRoutes  = require('./routes/daily');
 const marketRoutes = require('./routes/market');
-
-// Using Routes
-app.use('/daily', dailyRoutes);
-app.use('/market', marketRoutes);
+const apiRoutes    = require('./routes/api');
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
@@ -23,14 +20,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Using Routes
+app.use('/daily', dailyRoutes);
+app.use('/market', marketRoutes);
+app.use('/api', apiRoutes);
+
 // Temp Index
 app.get('/', (req, res) => {
   res.render('index');
-});
-
-// Add API key
-app.get('/api', (req, res) => {
-  res.render('api');
 });
 
 // 404 Error

@@ -1,8 +1,10 @@
 <% layout('./layouts/boilerplate') %>
 <h1>API Setup</h1>
-<div class="container col-sm-8 offset-sm-2">
+<div class="container col-lg-8">
+  <p class="alert alert-success">Please <a href="https://account.arena.net/applications">create an API key</a> with <strong>all</strong> permissions selected and paste it in the form below. The name does not matter.</p>
   <form action="/api" method="POST">
     <label class="form-label" for="apiKey">Enter your API Key:</label>
-    <input class="form-control" type="text" id="apiKey">
+    <input class="form-control form-control-lg" name="apiKey" type="text" id="apiKey">
+    <button type="submit" class="form-control btn btn-primary my-3">Submit</button>
   </form>
 </div>
