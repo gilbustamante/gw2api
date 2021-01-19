@@ -67,6 +67,5 @@ module.exports.renderMarket = async (req, res) => {
   } catch (err) {
     console.log(err)
   }
-  const script = require('../public/js/convertGold');
-  res.render('market', { sell, sellDict, buy, buyDict, script: script });
+  res.render('market', { sell, sellDict, buy, buyDict });
 }

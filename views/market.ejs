@@ -18,7 +18,7 @@
           <li class="list-group-item">
             <strong><%= sellDict[item.item_id].name %></strong>
             <br>
-            Price: <%- script.convertGold(item.price) %>
+            Price: <%- convertGold(item.price) %>
             <br>
             Sold: <%= new Date(item.purchased).toLocaleString(
               'en-US',
@@ -40,7 +40,7 @@
           <li class="list-group-item">
             <strong><%= buyDict[item.item_id].name %></strong>
             <br>
-            Price: <%- script.convertGold(item.price) %> 
+            Price: <%- convertGold(item.price) %> 
             <br>
             Sold: <%= new Date(item.purchased).toLocaleString(
               'en-US',

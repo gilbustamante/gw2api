@@ -2,14 +2,15 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-const express      = require('express');
-const session      = require('express-session');
-const cookieParser = require('cookie-parser');
-const path         = require('path');
-const ejsMate      = require('ejs-mate');
-const ExpressError = require('./utils/ExpressError');
-const flash        = require('connect-flash');
-const app          = express();
+const express         = require('express');
+const session         = require('express-session');
+const cookieParser    = require('cookie-parser');
+const path            = require('path');
+const ejsMate         = require('ejs-mate');
+const ExpressError    = require('./utils/ExpressError');
+const flash           = require('connect-flash');
+const { convertGold } = require('./public/js/convertGold');
+const app             = express();
 
 // Requiring Routes
 const dailyRoutes  = require('./routes/daily');
@@ -39,10 +40,11 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 
-// Flash middleware
+// Locals
 app.use((req, res, next) => {
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
+  res.locals.convertGold = convertGold;
   next();
 });
 
