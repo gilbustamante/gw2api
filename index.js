@@ -9,8 +9,10 @@ const path            = require('path');
 const ejsMate         = require('ejs-mate');
 const ExpressError    = require('./utils/ExpressError');
 const flash           = require('connect-flash');
-const { convertGold } = require('./public/js/convertGold');
 const app             = express();
+
+// Required to correctly format prices
+const { convertGold } = require('./public/js/convertGold');
 
 // Requiring Routes
 const dailyRoutes  = require('./routes/daily');
@@ -33,6 +35,7 @@ const sessionConfig = {
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
+    sameSite: 'strict',
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // One week expiration
     maxAge: 1000 * 60 * 60 * 24 * 7
   }
