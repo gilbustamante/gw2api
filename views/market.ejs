@@ -20,11 +20,11 @@
             <br>
             Price: <%- convertGold(item.price) %>
             <br>
-            Sold: <%= new Date(item.purchased).toLocaleString(
+            <%= new Date(item.purchased).toLocaleString(
               'en-US',
               {
-                dateStyle: 'long',
-                timeStyle: 'long'
+                dateStyle: 'short',
+                timeStyle: 'short'
               }
             ) %>
           </li>
@@ -42,11 +42,11 @@
             <br>
             Price: <%- convertGold(item.price) %> 
             <br>
-            Sold: <%= new Date(item.purchased).toLocaleString(
+            <%= new Date(item.purchased).toLocaleString(
               'en-US',
               {
-                dateStyle: 'long',
-                timeStyle: 'long'
+                dateStyle: 'short',
+                timeStyle: 'short'
               }
             ) %>
           </li>

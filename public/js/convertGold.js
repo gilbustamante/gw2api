@@ -13,5 +13,5 @@ module.exports.convertGold = (amount) => {
     return `${silver} <img src="/img/silver.png"> 
             ${copper} <img src="/img/copper.png">`;
   }
-  return `${price} copper`;
+  return `${price} <img src="/img/copper.png">`;
 }
