@@ -1,2 +1,2 @@
-# gw2api
-Guild Wars 2 API Test
+# GW2 API
+Test app to practice making API requests, setting/signing/clearing cookies, etc.
