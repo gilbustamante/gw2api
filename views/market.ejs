@@ -1,5 +1,5 @@
 <%- layout("layouts/boilerplate") %>
-<h1>Market Transactions</h1>
+<h1>Market Data</h1>
 <hr>
 <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
   <li class="nav-item" role="presentation">
@@ -11,47 +11,50 @@
 </ul>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-sold" role="tabpanel" aria-labelledby="pills-sold-tab">
-    <h4>Sold Items</h4>
-    <div class="mb-3">
-      <ul class="list-group-flush p-0">
-        <% for (let item of sell) { %> 
-          <li class="list-group-item">
-            <strong><%= sellDict[item.item_id].name %></strong>
-            <br>
-            Price: <%- convertGold(item.price) %>
-            <br>
-            <%= new Date(item.purchased).toLocaleString(
-              'en-US',
-              {
-                dateStyle: 'short',
-                timeStyle: 'short'
-              }
-            ) %>
-          </li>
-        <% } %> 
-      </ul>
+    <div class="row gx-0">
+      <div class="col-6 mb-3 border-end">
+        <h4 class="text-center">Sold Items</h4>
+        <ul class="list-group-flush p-0">
+          <% for (let item of sell) { %> 
+            <li class="list-group-item">
+              <strong><%= sellDict[item.item_id].name %></strong>
+              <br>
+              <%- convertGold(item.price) %>
+              <br>
+              <%= new Date(item.purchased).toLocaleString(
+                'en-US',
+                {
+                  dateStyle: 'short',
+                  timeStyle: 'short'
+                }
+              ) %>
+            </li>
+          <% } %> 
+        </ul>
+      </div>
+      <div class="col-6 mb-3">
+        <h4 class="text-center">Bought Items</h4>
+        <ul class="list-group-flush p-0">
+          <% for (let item of buy) { %> 
+            <li class="list-group-item">
+              <strong><%= buyDict[item.item_id].name %></strong>
+              <br>
+              <%- convertGold(item.price) %> 
+              <br>
+              <%= new Date(item.purchased).toLocaleString(
+                'en-US',
+                {
+                  dateStyle: 'short',
+                  timeStyle: 'short'
+                }
+              ) %>
+            </li>
+          <% } %> 
+        </ul>
+      </div>
     </div>
   </div>
   <div class="tab-pane fade" id="pills-bought" role="tabpanel" aria-labelledby="pills-bought-tab">
-    <h4>Bought Items</h4>
-    <div class="mb-3">
-      <ul class="list-group-flush p-0">
-        <% for (let item of buy) { %> 
-          <li class="list-group-item">
-            <strong><%= buyDict[item.item_id].name %></strong>
-            <br>
-            Price: <%- convertGold(item.price) %> 
-            <br>
-            <%= new Date(item.purchased).toLocaleString(
-              'en-US',
-              {
-                dateStyle: 'short',
-                timeStyle: 'short'
-              }
-            ) %>
-          </li>
-        <% } %> 
-      </ul>
-    </div>
+    Test
   </div>
 </div>
