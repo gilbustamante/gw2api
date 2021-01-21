@@ -5,7 +5,9 @@ const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 
 // Display Market Info
-router.route('/')
-  .get(hasCookie, catchAsync(market.renderMarket))
+router.route('/history')
+  .get(hasCookie, catchAsync(market.renderMarketHistory))
 
+router.route('/current')
+  .get(hasCookie, catchAsync(market.renderMarketCurrent))
 module.exports = router;

@@ -1,0 +1,46 @@
+<%- layout('layouts/boilerplate') %>
+<h1 class="mb-2">Current Listings</h1>
+<hr>
+<ul class="nav nav-pills nav-fill mb-2" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="buy" data-bs-toggle="pill" href="#pills-buy" role="tab" aria-controls="pills-buy" aria-selected="true">Buy Orders</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="sell" data-bs-toggle="pill" href="#pills-sell" role="tab" aria-controls="pills-sell" aria-selected="false">Sell Orders</a>
+  </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-buy" role="tabpanel" aria-labelledby="buy">
+    <div class="py-2 mb-3">
+      <div class="py-2 mb-3">
+        <ul class="list-group-flush p-0">
+          <% for (let item of buy) { %> 
+            <li class="list-group-item">
+              <strong><%= buyDict[item.item_id].name %></strong>
+              (<%= item.quantity %>)
+              <br>
+              <%- convertGold(item.price) %>
+            </li>
+          <% } %> 
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="pills-sell" role="tabpanel" aria-labelledby="sell">
+    <div class="py-2 mb-3">
+      <div class="py-2 mb-3">
+        <ul class="list-group-flush p-0">
+          <% for (let item of sell) { %> 
+            <li class="list-group-item">
+              <strong><%= sellDict[item.item_id].name %></strong>
+              (<%= item.quantity %>)
+              <br>
+              <%- convertGold(item.price) %>
+            </li>
+          <% } %> 
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
