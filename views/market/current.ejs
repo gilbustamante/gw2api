@@ -1,6 +1,19 @@
 <%- layout('layouts/boilerplate') %>
 <h1 class="mb-2">Current Listings</h1>
 <hr>
+<% if (delivery.coins > 0 || delivery.itemCount.length > 0) { %> 
+  <div class="alert alert-info">
+    Ready for pickup: 
+    <br>
+    <% if (delivery.coins > 0) { %>
+      <%- convertGold(delivery.coins) %>
+    <% } %>
+    <% if (delivery.itemCount > 0) { %>
+      <br>
+      <%= delivery.itemCount %> items
+    <% } %>
+  </div>
+<% } %>
 <ul class="nav nav-pills nav-fill mb-2" id="pills-tab" role="tablist">
   <li class="nav-item" role="presentation">
     <a class="nav-link active" id="buy" data-bs-toggle="pill" href="#pills-buy" role="tab" aria-controls="pills-buy" aria-selected="true">Buy Orders</a>

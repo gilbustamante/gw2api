@@ -133,8 +133,25 @@ module.exports.renderMarketCurrent = async (req, res) => {
       const id = i.id;
       buyDict[id] = i;
     }
+
+    ///////////////////////////////////////////////////////////
+
+    // Items waiting for pickup
+
+    const deliveryUrl = 'https://api.guildwars2.com/v2/commerce/delivery'
+    const deliveryRes = await axios.get(deliveryUrl, config)
+    let items = 0
+    for (let item of deliveryRes.data.items) {
+      items = items + item.count;
+    }
+
+    var delivery = {
+      'coins': deliveryRes.data.coins,
+      'itemCount': items
+    }
+
   } catch (err) {
     console.log(err);
   }
-  res.render('market/current', { sell, sellDict, buy, buyDict })
+  res.render('market/current', { sell, sellDict, buy, buyDict, delivery })
 }
