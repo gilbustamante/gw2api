@@ -20,10 +20,12 @@ module.exports.renderBankInfo = async (req, res) => {
 
     // Make an array of item IDs for next request
     for (let item of response.data) {
+      // Empty bank slots return 'null'
       if (item === null) {
         bankObj.empty++;
       } else {
-        bank.push((item.id).toString())
+        // Item ID, item quantity
+        bank.push([item.id, item.count])
       }
     }
 
