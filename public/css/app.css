@@ -7,3 +7,7 @@ body {
 li.list-group-item:hover {
     background: rgb(250, 250, 250);
 }
+
+.hidden {
+    display: none;
+}

@@ -1,4 +1,4 @@
-module.exports.convertGold = (amount) => {
+module.exports.convertGold = amount => {
   let price = amount.toString();
   if (price.length > 4) {
     const copper = price.slice(-2); // last 2 digits

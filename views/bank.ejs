@@ -2,7 +2,7 @@
 <h1>Bank</h1>
 <hr>
 <p class="text-muted">Free slots: <%= bankObj.empty %> / <%= bank.length %></p>
-<input class="form-control form-control-lg my-3" type="text" placeholder="Enter search here" aria-label=".form-control-lg">
+<input id="filterInput" class="form-control form-control-lg my-3" type="text" placeholder="Enter search here" aria-label="search input">
 <ul class="list-group-flush ps-0">
   <% for (let item of bank) { %>
     <% if (bankObj[item[0]]) { %>
@@ -12,7 +12,7 @@
             <img src="<%= bankObj[item[0]].icon %>" alt="Item image">
           </div>
           <div class="col">
-            <p class="mb-0"><strong><%= bankObj[item[0]].name %></strong></p>
+            <p class="mb-0 itemTitle"><strong><%= bankObj[item[0]].name %></strong></p>
             <p class="mb-0"><%= bankObj[item[0]].type %></p>
             <p class="mb-0">Qty: <%= item[1] %></p>
           </div>
@@ -21,3 +21,4 @@
     <% } %> 
   <% } %> 
 </ul>
+<script src="/js/filterSearch.js"></script>
