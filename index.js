@@ -18,6 +18,7 @@ const { convertGold } = require('./public/js/convertGold');
 const dailyRoutes  = require('./routes/daily');
 const marketRoutes = require('./routes/market');
 const apiRoutes    = require('./routes/api');
+const bankRoutes = require('./routes/bank');
 
 // App setup
 app.engine('ejs', ejsMate);
@@ -55,6 +56,7 @@ app.use((req, res, next) => {
 app.use('/daily', dailyRoutes);
 app.use('/market', marketRoutes);
 app.use('/api', apiRoutes);
+app.use('/bank', bankRoutes);
 
 // Temp Index
 app.get('/', (req, res) => {

@@ -1,0 +1,22 @@
+<% layout('./layouts/boilerplate') %>
+<h1>Bank</h1>
+<hr>
+<p class="text-muted">Free slots: <%= bankObj.empty %> / <%= bank.length %></p>
+<ul class="list-group-flush">
+  <% for (let item of bank) { %>
+    <% if (bankObj[item]) { %>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-auto">
+            <img src="<%= bankObj[item].icon %>" alt="Item image">
+          </div>
+          <div class="col">
+            <p class="mb-0"><strong><%= bankObj[item].name %></strong></p>
+            <p class="mb-0"><%= bankObj[item].type %></p>
+            <p class="mb-0"><%= bankObj[item].rarity %></p>
+          </div>
+        </div>
+      </li>
+    <% } %> 
+  <% } %> 
+</ul>

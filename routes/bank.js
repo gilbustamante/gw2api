@@ -1,10 +1,9 @@
 const express = require('express');
-const api = require('../controllers/api');
+const bank = require('../controllers/bank');
 const catchAsync = require('../utils/catchAsync');
 const router = express.Router();
 
 router.route('/')
-  .get(api.renderAPIForm)
-  .post(catchAsync(api.handleAPI));
+  .get(catchAsync(bank.renderBankInfo))
 
 module.exports = router;

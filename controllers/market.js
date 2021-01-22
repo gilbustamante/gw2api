@@ -145,6 +145,7 @@ module.exports.renderMarketCurrent = async (req, res) => {
       items = items + item.count;
     }
 
+    // TODO: Show each individual item (with icon maybe?)
     var delivery = {
       'coins': deliveryRes.data.coins,
       'itemCount': items
