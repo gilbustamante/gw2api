@@ -22,10 +22,8 @@
                   <img src="<%= buyDict[item.item_id].icon %>" alt="Item image">
                 </div>
                 <div class="col">
-                  <strong><%= buyDict[item.item_id].name %></strong>
-                  <br>
-                  <%- convertGold(item.price) %>
-                  <br>
+                  <strong><p class="mb-0 itemTitle"><%= buyDict[item.item_id].name %></strong></p>
+                  <p class="mb-0"><%- convertGold(item.price) %></p>
                   <%= new Date(item.purchased).toLocaleString(
                     'en-US',
                     {
@@ -52,10 +50,8 @@
                   <img src="<%= sellDict[item.item_id].icon %>" alt="Item image">
                 </div>
                 <div class="col">
-                  <strong><%= sellDict[item.item_id].name %></strong>
-                  <br>
-                  <%- convertGold(item.price) %>
-                  <br>
+                  <strong><p class="mb-0 itemTitle"><%= sellDict[item.item_id].name %></strong></p>
+                  <p class="mb-0"><%- convertGold(item.price) %></p>
                   <%= new Date(item.purchased).toLocaleString(
                     'en-US',
                     {
