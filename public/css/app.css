@@ -5,11 +5,10 @@ body {
 
 li.list-group-item {
     background: rgb(249, 251, 255);
-    transition: background 0.1s;
 }
 
 li.list-group-item:hover {
-    background: hsl(225, 14%, 95%);
+    background: hsl(225, 33%, 93%);
 }
 
 nav#navBar {
