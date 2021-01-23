@@ -2,7 +2,7 @@
 <h1>Bank</h1>
 <hr>
 <p class="text-muted">Free slots: <%= bankObj.empty %> / <%= bank.length %></p>
-<input id="filterInput" class="form-control form-control-lg my-3" type="text" placeholder="Enter search here" aria-label="search input">
+<input id="filterInput" class="form-control form-control-lg my-3" type="text" placeholder="Type to search" aria-label="Search input">
 <ul class="list-group-flush ps-0">
   <% for (let item of bank) { %>
     <% if (bankObj[item[0]]) { %>
