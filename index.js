@@ -14,6 +14,9 @@ const app             = express();
 // Required to correctly format prices
 const { convertGold } = require('./public/js/convertGold');
 
+// Time formatting
+const { format } = require('timeago.js');
+
 // Requiring Routes
 const dailyRoutes  = require('./routes/daily');
 const marketRoutes = require('./routes/market');
@@ -28,6 +31,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/scripts', express.static(path.join(__dirname, './node_modules/timeago.js')))
 
 // Session setup
 const sessionConfig = {
@@ -49,6 +53,7 @@ app.use((req, res, next) => {
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   res.locals.convertGold = convertGold;
+  res.locals.timeAgo = format;
   next();
 });
 

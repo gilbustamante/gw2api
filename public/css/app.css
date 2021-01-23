@@ -13,7 +13,10 @@ li.list-group-item:hover {
 }
 
 nav#navBar {
-    /* background: rgb(95, 95, 95); */
+    background: rgb(48, 86, 131);
+}
+
+li.darkerBlue a.nav-link.active {
     background: rgb(48, 86, 131);
 }
 
