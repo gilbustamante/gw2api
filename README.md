@@ -7,7 +7,8 @@ Simple web app that keeps track of things the average [GW2](https://www.guildwar
   * Trading post history (bought and sold) for a given account.
   * Current trading post orders (buy and sell).
   * Given account's bank inventory.
+* Current orders now alert the user if they have been undercut or outbid.
+
 ### To Do
-* Add trading post 'watcher' feature that monitors trading post prices and compares them with the user's orders, alerting the user if they have been outbid/undercut.
 * Add ability to calculate expected profit and/or ROI for an item based on buy price, sell price and listing/exchange fees.
 * More account stats.
