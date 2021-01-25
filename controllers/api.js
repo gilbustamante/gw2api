@@ -14,8 +14,8 @@ module.exports.handleAPI = async (req, res) => {
     signed: true,
     httpOnly: true,
     sameSite: 'strict',
-    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-    maxAge: 1000 * 60 * 60 * 24 * 7
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 30, // One month
+    maxAge: 1000 * 60 * 60 * 24 * 30
   }
 
   // Set new cookie
@@ -25,6 +25,6 @@ module.exports.handleAPI = async (req, res) => {
   // otherwise redirect to index
   const redirectUrl = req.session.returnTo || '/';
   delete req.session.returnTo; // Clear returnTo from session
-  req.flash('success', 'API key added (expires in one week).')
+  req.flash('success', 'API key added (expires in 30 days).')
   res.redirect(redirectUrl);
 }

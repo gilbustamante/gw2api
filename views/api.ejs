@@ -1,7 +1,7 @@
 <% layout('./layouts/boilerplate') %>
 <h1>API Setup</h1>
 <div class="container col-lg-8 mb-3">
-  <p class="alert alert-success">Please <a href="https://account.arena.net/applications">create an API key</a> with <strong>all</strong> permissions selected and paste it in the form below (the name does not matter). This will be used to create a cookie that will last for one week.</p>
+  <p class="alert alert-success">Please <a href="https://account.arena.net/applications">create an API key</a> with <strong>all</strong> permissions selected and paste it in the form below (the name does not matter). This will be used to create a cookie that will last for 30 days.</p>
   <form action="/api" method="POST">
     <label class="form-label" for="apiKey">Enter your API Key:</label>
     <input class="form-control form-control-lg" name="apiKey" type="text" id="apiKey">
