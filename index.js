@@ -11,11 +11,9 @@ const ExpressError    = require('./utils/ExpressError');
 const flash           = require('connect-flash');
 const app             = express();
 
-// Required to correctly format prices
-const { convertGold } = require('./public/js/convertGold');
-
-// Time formatting
-const { format } = require('timeago.js');
+// Scripts
+const { convertGold } = require('./public/js/convertGold'); // Coin conversion
+const { format } = require('timeago.js'); // Time formatting
 
 // Requiring Routes
 const dailyRoutes  = require('./routes/daily');
@@ -31,7 +29,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/scripts', express.static(path.join(__dirname, './node_modules/timeago.js')))
 
 // Session setup
 const sessionConfig = {

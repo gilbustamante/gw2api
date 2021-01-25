@@ -180,7 +180,6 @@ module.exports.renderMarketCurrent = async (req, res) => {
         }
       }
     }
-
   } catch (err) {
     console.log(err);
   }
