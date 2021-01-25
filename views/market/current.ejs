@@ -34,7 +34,7 @@
                 <img class="rounded" src="<%= buyDict[item.item_id].icon %>" width="64" height="64" alt="Item image">
               </div>
               <div class="col">
-                <strong><p class="mb-0 itemTitle"><span class="itemName"><%= buyDict[item.item_id].name %></span> (<%= item.quantity %>)</strong>
+                <strong><p class="mb-0 itemTitle"><span data-bs-toggle="tooltip" data-bs-placement="top" title="Click to copy" class="itemName"><%= buyDict[item.item_id].name %></span> (<%= item.quantity %>)</strong>
                 <p class="m-0">
                   <%- convertGold(item.price) %> <strong><%= item.price < item.currentBuy ? '(Outbid!)' : '' %></strong>
                 </p>
@@ -56,7 +56,7 @@
                 <img class="rounded" src="<%= sellDict[item.item_id].icon %>" width="64" height="64" alt="Item image">
               </div>
               <div class="col">
-                <strong><p class="mb-0 itemTitle"><%= sellDict[item.item_id].name %></strong> (<%= item.quantity %>)</p>
+                <strong><p class="mb-0 itemTitle"><span data-bs-toggle="tooltip" data-bs-placement="top" title="Click to copy" class="itemName"><%= sellDict[item.item_id].name %></span> (<%= item.quantity %>)</strong>
                 <p class="m-0">
                   <%- convertGold(item.price) %> <strong><%= item.price > item.currentSell ? '(Undercut!)' : '' %></strong>
                 </p>
