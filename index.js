@@ -13,6 +13,7 @@ const app             = express();
 
 // Scripts
 const { convertGold } = require('./public/js/convertGold'); // Coin conversion
+const { totalGold } = require('./public/js/totalGold'); // Total gold of orders
 const { format } = require('timeago.js'); // Time formatting
 
 // Requiring Routes
@@ -51,6 +52,7 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error');
   res.locals.convertGold = convertGold;
   res.locals.timeAgo = format;
+  res.locals.totalGold = totalGold;
   next();
 });
 
