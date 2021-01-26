@@ -4,5 +4,6 @@ module.exports.totalGold = arr => {
     allPrices.push(item.price * item.quantity);
   }
   const reducer = (acc, current) => acc + current;
-  return allPrices.reduce(reducer);
+  const profit = allPrices.reduce(reducer) * 0.85;
+  return Math.floor(profit)
 }
