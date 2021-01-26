@@ -3,6 +3,10 @@ body {
     color: rgb(48, 86, 131);
 }
 
+li a.dropdown-item:active {
+    background: rgb(48, 86, 131);
+}
+
 li.darkerBlue a.nav-link.active {
     background: rgb(48, 86, 131);
 }
@@ -11,12 +15,17 @@ li.list-group-item {
     background: rgb(249, 251, 255);
 }
 
+
 li.list-group-item.warning {
     background: rgba(255, 151, 151, 0.644);
 }
 
 nav#navBar {
     background: rgb(48, 86, 131);
+}
+
+span.itemName:active {
+    color: rgb(255, 255, 255);
 }
 
 .hidden {
