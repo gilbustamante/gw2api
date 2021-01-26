@@ -24,7 +24,12 @@ nav#navBar {
     background: rgb(48, 86, 131);
 }
 
+span.itemName:hover {
+    cursor: pointer;
+}
+
 span.itemName:active {
+    background:rgb(48, 86, 131);
     color: rgb(255, 255, 255);
 }
 
