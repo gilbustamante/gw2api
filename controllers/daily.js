@@ -1,4 +1,6 @@
 const axios = require('axios').default;
+const NodeCache = require('node-cache');
+const gw2Cache = new NodeCache();
 
 //// Globals
 // Today
@@ -38,13 +40,21 @@ module.exports.renderDailies = async (req, res) => {
 
   //// TODO: Refactor this stuff ////
   try {
-    // Request Today's Dailies
-    const today = await axios.get(dailyUrl);
-    todayDailies = today.data;
-
-    // Request Tomorrow's Dailies
-    const tomorrow = await axios.get(dailyTomorrowUrl);
-    tomorrowDailies = tomorrow.data;
+    // Retrieve today/tomorrow dailies from cache, otherwise request data
+    todayDailies = gw2Cache.get('today');
+    if (todayDailies == undefined) {
+      // Request Today's Dailies
+      const today = await axios.get(dailyUrl);
+      todayDailies = today.data;
+      gw2Cache.set('today', today.data, 3600) // One hour TTL
+    }
+    tomorrowDailies = gw2Cache.get('tomorrow');
+    if (tomorrowDailies == undefined) {
+      // Request Tomorrow's Dailies
+      const tomorrow = await axios.get(dailyTomorrowUrl);
+      tomorrowDailies = tomorrow.data;
+      gw2Cache.set('tomorrow', tomorrow.data, 3600) // One hour TTL
+    }
 
     // Today - PvE
     for (let achievement of todayDailies.pve) {
@@ -79,6 +89,8 @@ module.exports.renderDailies = async (req, res) => {
       todayCats.special.push(achievement.id)
     }
 
+    //////////////////////////////////////////////
+
     // Tomorrow - PvE
     for (let achievement of tomorrowDailies.pve) {
       const id = filterAchievements(achievement)
@@ -87,8 +99,6 @@ module.exports.renderDailies = async (req, res) => {
         tomorrowCats.pve.push(id)
       }
     }
-
-    //////////////////////////////////////////////
 
     // Tomorrow - PvP
     for (let achievement of tomorrowDailies.pvp) {
@@ -114,14 +124,21 @@ module.exports.renderDailies = async (req, res) => {
       tomorrowCats.special.push(achievement.id)
     }
 
-    // Lookup Achievement IDs
-    const todayDetails = await axios.get(
-      dailyLookupUrl + todayBuffer.join());
-    const tomorrowDetails = await axios.get(
-      dailyLookupUrl + tomorrowBuffer.join());
+    //////////////////////////////////////////////
 
-    todayAchievements = todayDetails.data;
-    tomorrowAchievements = tomorrowDetails.data;
+    // Retrieve today/tomorrow achievements from cache, otherwise request data
+    todayAchievements = gw2Cache.get('todayAchievements');
+    if (todayAchievements == undefined) {
+      const details = await axios.get(dailyLookupUrl + todayBuffer.join());
+      todayAchievements = details.data;
+      gw2Cache.set('todayAchievements', details.data, 3600) // One hour TTL
+    }
+    tomorrowAchievements = gw2Cache.get('tomorrowAchievements');
+    if (tomorrowAchievements == undefined) {
+      const details = await axios.get(dailyLookupUrl + tomorrowBuffer.join());
+      tomorrowAchievements = details.data;
+      gw2Cache.set('tomorrowAchievements', details.data, 3600) // One hour TTL
+    }
 
     todayDict = {};
     for (let achievement of todayAchievements) {
