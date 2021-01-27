@@ -44,6 +44,7 @@ module.exports.renderMarketHistory = async (req, res) => {
     var buyDict = {};
     var buy = [];
 
+    // Request buy history data
     const buyMarketUrl = 'https://api.guildwars2.com/v2/commerce/transactions/history/buys';
     const buyMarketRes = await axios.get(buyMarketUrl, config)
 

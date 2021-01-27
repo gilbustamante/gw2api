@@ -1,4 +1,10 @@
 const axios = require('axios').default;
+const NodeCache = require('node-cache');
+const gw2Cache = new NodeCache();
+
+// Globals
+let bankItems = [];
+let itemDetails = [];
 
 // Render Bank filter page
 module.exports.renderBankInfo = async (req, res) => {
@@ -16,10 +22,16 @@ module.exports.renderBankInfo = async (req, res) => {
     bankObj.empty = 0;
 
     const url = 'https://api.guildwars2.com/v2/account/bank';
-    const response = await axios.get(url, config);
+    bankItems = gw2Cache.get('bankItems');
+    if (bankItems == undefined) {
+      // Request bank items
+      const res = await axios.get(url, config);
+      bankItems = res.data;
+      gw2Cache.set('bankItems', res.data, 300) // Five minute TTL
+    }
 
     // Make an array of item IDs for next request
-    for (let item of response.data) {
+    for (let item of bankItems) {
       // Empty bank slots return 'null'
       if (item === null) {
         bankObj.empty++;
@@ -31,10 +43,16 @@ module.exports.renderBankInfo = async (req, res) => {
 
     // Request item info based on IDs
     const itemUrl = 'https://api.guildwars2.com/v2/items?ids='
-    const itemRes = await axios.get(itemUrl + bank.join())
+    itemDetails = gw2Cache.get('itemDetails');
+    if (itemDetails == undefined) {
+      // Request item details
+      const res = await axios.get(itemUrl + bank.join())
+      itemDetails = res.data;
+      gw2Cache.set('itemDetails', res.data, 300) // Five minute TTL
+    }
 
     // Object with item ID keys and item object values
-    for (let item of itemRes.data) {
+    for (let item of itemDetails) {
       const { id } = item;
       bankObj[id] = item;
     }

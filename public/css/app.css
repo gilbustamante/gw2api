@@ -3,6 +3,21 @@ body {
     color: rgb(48, 86, 131);
 }
 
+button.btn {
+    background: rgb(72, 107, 151);
+    color: rgb(249, 251, 255);
+}
+
+button.btn:active {
+    background: rgb(61, 101, 149);
+    color: rgb(249, 251, 255);
+}
+
+button.btn:hover {
+    background: rgb(48, 86, 131);
+    color: rgb(249, 251, 255);
+}
+
 li a.dropdown-item:active {
     background: rgb(48, 86, 131);
 }
