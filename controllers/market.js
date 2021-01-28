@@ -179,15 +179,17 @@ module.exports.renderMarketCurrent = async (req, res) => {
     const tempSet = new Set(sellBuffer.concat(buyBuffer));
     const allOrders = Array.from(tempSet);
     
+    console.log(`Total unique orders: ${allOrders.length}`)
+
     // Request listing info
-    const listingUrl = 'https://api.guildwars2.com/v2/commerce/listings?ids='
+    const listingUrl = 'https://api.guildwars2.com/v2/commerce/prices?ids='
     const listingRes = await axios.get(listingUrl + allOrders.join())
 
     // Give sell objects the current market's sell price
     for (let order of sell) {
       for (let item of listingRes.data) {
         if (item.id === order.item_id) {
-          order.currentSell = item.sells[0].unit_price;
+          order.currentSell = item.sells.unit_price;
         }
       }
     }
@@ -196,7 +198,7 @@ module.exports.renderMarketCurrent = async (req, res) => {
     for (let order of buy) {
       for (let item of listingRes.data) {
         if (item.id === order.item_id) {
-          order.currentBuy = item.buys[0].unit_price;
+          order.currentBuy = item.buys.unit_price;
         }
       }
     }
