@@ -1,4 +1,6 @@
 const axios = require('axios').default;
+const NodeCache = require('node-cache');
+const gw2cache = new NodeCache();
 
 // TODO: add validation for apiKey
 
@@ -8,6 +10,7 @@ module.exports.renderMarketHistory = async (req, res) => {
     var sellBuffer = [];
     var sellDict = {};
     var sell = [];
+    var sellDetails = [];
 
     // Request header config
     const config = {
@@ -17,22 +20,31 @@ module.exports.renderMarketHistory = async (req, res) => {
     }
     // Request sell history data
     const sellMarketUrl = 'https://api.guildwars2.com/v2/commerce/transactions/history/sells';
-    const sellMarketRes = await axios.get(sellMarketUrl, config)
-
-    // List to iterate over
-    sell = sellMarketRes.data;
+    sell = gw2cache.get('sellHistory');
+    if (sell == undefined) {
+      // Request sell history
+      const res = await axios.get(sellMarketUrl, config)
+      sell = res.data;
+      gw2cache.set('sellHistory', res.data, 300) // Five minute TTL
+    }
 
     // Make a list of item IDs for next request
     for (let i of sell) {
       sellBuffer.push(i.item_id)
     }
 
-    // Request item info based on item IDs
+    // Retrieve item info (from cache if it exists)
     const sellItemUrl = 'https://api.guildwars2.com/v2/items?ids='
-    const sellItemRes = await axios.get(sellItemUrl + sellBuffer.join())
+    sellDetails = gw2cache.get('sellDetails');
+    if (sellDetails == undefined) {
+      const res = await axios.get(sellItemUrl + sellBuffer.join())
+      sellDetails = res.data;
+      gw2cache.set('sellDetails', res.data, 300)
+    }
+    
 
     // Create dictionary with item ID keys and item object values
-    for (let i of sellItemRes.data) {
+    for (let i of sellDetails) {
       const id = i.id;
       sellDict[id] = i;
     }
@@ -43,25 +55,32 @@ module.exports.renderMarketHistory = async (req, res) => {
     var buyBuffer = [];
     var buyDict = {};
     var buy = [];
+    var buyDetails = [];
 
     // Request buy history data
     const buyMarketUrl = 'https://api.guildwars2.com/v2/commerce/transactions/history/buys';
-    const buyMarketRes = await axios.get(buyMarketUrl, config)
-
-    // List to iterate over
-    buy = buyMarketRes.data;
+    buy = gw2cache.get('buyHistory');
+    if (buy == undefined) {
+      const res = await axios.get(buyMarketUrl, config)
+      buy = res.data;
+      gw2cache.set('buyHistory', res.data, 300)
+    }
 
     // Make a list of item IDs for next request
     for (let i of buy) {
       buyBuffer.push(i.item_id)
     }
 
-    // Request item info based on item IDs
-    // Re-using sellItemUrl
-    const buyItemRes = await axios.get(sellItemUrl + buyBuffer.join())
+    // Retrieve item info (from cache if it exists)
+    buyDetails = gw2cache.get('buyDetails');
+    if (buyDetails == undefined) {
+      const res = await axios.get(sellItemUrl + buyBuffer.join())
+      buyDetails = res.data;
+      gw2cache.set('buyDetails', res.data, 300)
+    }
 
     // Create dictionary with item ID keys and item object values
-    for (let i of buyItemRes.data) {
+    for (let i of buyDetails) {
       const id = i.id;
       buyDict[id] = i;
     }
