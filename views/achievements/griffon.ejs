@@ -1,0 +1,12 @@
+<%- layout('layouts/boilerplate') %>
+<h1 class="mb-2">Griffon Mount</h1>
+<hr>
+<p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim eum voluptate cupiditate error quisquam corporis velit, et libero ab aliquam non, sed illo maxime perspiciatis accusantium tenetur mollitia vero iure.</span><span>Dolorum voluptates hic, nulla asperiores adipisci beatae, saepe dolore ipsa doloribus, minus ipsum. Aut, veritatis vero rerum unde enim eligendi molestias consectetur facere? Pariatur, cupiditate optio id maiores accusantium odit.</span></p>
+<p><span>Enim architecto dolore consectetur quos amet fuga voluptates et nihil quisquam dicta atque, perspiciatis beatae dolorem dignissimos porro repellendus non recusandae voluptate rem similique tenetur. Culpa velit vitae commodi eos!</span><span>Molestiae consequuntur voluptate iusto odio laboriosam quae maxime ipsam, numquam ratione vero recusandae velit ab hic quibusdam nostrum aliquam, eligendi deserunt ipsum! Eum quae earum quasi itaque facilis repellat ipsum?</span></p>
+<ul class="list-group-flush p-0">
+  <% for (let i of data) { %>
+    <li class="list-group-item">
+      <%= i.id %> - <%= i.done %>
+    </li>
+  <% } %>
+</ul>

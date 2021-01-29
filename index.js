@@ -25,6 +25,7 @@ const path            = require('path');
 const ejsMate         = require('ejs-mate');
 const ExpressError    = require('./utils/ExpressError');
 const flash           = require('connect-flash');
+const mongoose        = require('mongoose');
 const app             = express();
 
 // Scripts
@@ -37,6 +38,20 @@ const achievementRoutes  = require('./routes/achievements');
 const marketRoutes = require('./routes/market');
 const apiRoutes    = require('./routes/api');
 const bankRoutes = require('./routes/bank');
+
+// Database setup
+const database = process.env.DATABASE_URL || 'mongodb://localhost:27017/gw2';
+mongoose.connect(database, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+});
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error: '));
+db.once('open', () => {
+  console.log('Database connected.');
+});
 
 // App setup
 app.engine('ejs', ejsMate);

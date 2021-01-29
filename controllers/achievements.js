@@ -2,7 +2,8 @@ const axios = require('axios').default;
 const NodeCache = require('node-cache');
 const gw2Cache = new NodeCache();
 
-//// Globals
+
+//// Daily Globals
 // Today
 let todayAchievements = {};
 let todayCats = {};
@@ -161,6 +162,19 @@ module.exports.renderDailies = async (req, res) => {
     todayCats,
     tomorrowCats
   });
+}
+
+module.exports.renderGriffon = async (req, res) => {
+  // Request header config
+  const config = {
+    headers: {
+      Authorization: 'Bearer ' + req.signedCookies.apiKey
+    }
+  }
+
+  const achievementsUrl = 'https://api.guildwars2.com/v2/account/achievements'
+  const achievementsRes = await axios.get(achievementsUrl, config);
+  res.render('achievements/griffon', { data: achievementsRes.data });
 }
 
 const filterAchievements = item => {
