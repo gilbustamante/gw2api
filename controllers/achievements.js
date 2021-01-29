@@ -1,4 +1,5 @@
 const axios = require('axios').default;
+const Achievement = require('../models/achievement');
 const NodeCache = require('node-cache');
 const gw2Cache = new NodeCache();
 
@@ -165,6 +166,8 @@ module.exports.renderDailies = async (req, res) => {
 }
 
 module.exports.renderGriffon = async (req, res) => {
+  let achievements = [];
+
   // Request header config
   const config = {
     headers: {
@@ -174,7 +177,15 @@ module.exports.renderGriffon = async (req, res) => {
 
   const achievementsUrl = 'https://api.guildwars2.com/v2/account/achievements'
   const achievementsRes = await axios.get(achievementsUrl, config);
-  res.render('achievements/griffon', { data: achievementsRes.data });
+
+  for (let i of achievementsRes.data) {
+    const achievement = await Achievement.findOne({ id: i.id });
+    if (achievement) {
+      achievements.push(achievement)
+    }
+  }
+
+  res.render('achievements/griffon', { achievements });
 }
 
 const filterAchievements = item => {
