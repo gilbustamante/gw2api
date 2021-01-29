@@ -2,6 +2,22 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
+/////////////////////////////////////////
+/////////////////////////////////////////
+/////////////////////////////////////////
+/////////////////////////////////////////
+
+// TODO: implement database, save all the
+// item names/info from market routes to 
+// it, then pull from that instead of
+// API request. Then cache all the other
+// requests for like 5 mins. Boom
+
+/////////////////////////////////////////
+/////////////////////////////////////////
+/////////////////////////////////////////
+/////////////////////////////////////////
+
 const express         = require('express');
 const session         = require('express-session');
 const cookieParser    = require('cookie-parser');
@@ -17,7 +33,7 @@ const { totalGold } = require('./public/js/totalGold'); // Total gold of orders
 const { format } = require('timeago.js'); // Time formatting
 
 // Requiring Routes
-const dailyRoutes  = require('./routes/daily');
+const achievementRoutes  = require('./routes/achievements');
 const marketRoutes = require('./routes/market');
 const apiRoutes    = require('./routes/api');
 const bankRoutes = require('./routes/bank');
@@ -57,7 +73,7 @@ app.use((req, res, next) => {
 });
 
 // Using Routes
-app.use('/daily', dailyRoutes);
+app.use('/achievements', achievementRoutes);
 app.use('/market', marketRoutes);
 app.use('/api', apiRoutes);
 app.use('/bank', bankRoutes);

@@ -1,10 +1,10 @@
 const express = require('express');
-const daily = require('../controllers/daily');
+const achievements = require('../controllers/achievements');
 const catchAsync = require('../utils/catchAsync');
 const router = express.Router();
 
 // Display Dailies
-router.route('/')
-  .get(catchAsync(daily.renderDailies));
+router.route('/daily')
+  .get(catchAsync(achievements.renderDailies));
 
 module.exports = router;

@@ -155,7 +155,7 @@ module.exports.renderDailies = async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-  res.render('daily', {
+  res.render('achievements/daily', {
     todayDict,
     tomorrowDict,
     todayCats,

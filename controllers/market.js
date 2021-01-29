@@ -179,7 +179,11 @@ module.exports.renderMarketCurrent = async (req, res) => {
     const tempSet = new Set(sellBuffer.concat(buyBuffer));
     const allOrders = Array.from(tempSet);
     
-    console.log(`Total unique orders: ${allOrders.length}`)
+    // GW2 API has a 'max items per request' limit of 200
+    // TODO: handle this error if encountered
+    if (allOrders.length > 200) {
+      console.log('Total orders is greater than 200, some results will not be found...')
+    }
 
     // Request listing info
     const listingUrl = 'https://api.guildwars2.com/v2/commerce/prices?ids='
