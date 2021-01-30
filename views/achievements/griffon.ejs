@@ -1,11 +1,14 @@
 <%- layout('layouts/boilerplate') %>
 <h1 class="mb-2">Griffon Mount</h1>
 <hr>
+<p>The griffon mount is a reward for completing <a href="https://wiki.guildwars2.com/wiki/Griffon_(mount)#Unlock_achievements">scavenger hunts</a> around <a href="https://wiki.guildwars2.com/wiki/Elona">Elona</a> (as well as some bounties/events). You will need a total of 250<img src="/img/gold.png" alt="Gold"> to complete the collections. Below is a list of the achievements and your account's progress in each.</p>
 <ul class="list-group-flush p-0">
   <% for (let a of griffonAchievements) { %>
     <% if (achievements[a.id]) { %> 
       <li class="list-group-item <%= achievements[a.id].done ? 'muted' : '' %>">
-        <h6 class="mb-1"><strong><%= a.name %></strong></h6>
+        <h6 class="mb-1"><strong>
+          <a href="https://wiki.guildwars2.com/wiki/<%= a.name %>"><%= a.name %></a>
+        </strong></h6>
         <p class="mb-1"><%= a.requirement %></p>
         <div class="progress">
           <div class="progress-bar" role="progressbar" style="width: <%= achievements[a.id].per %>%" aria-valuenow="<%= achievements[a.id].per %>" aria-valuemin="0" aria-valuemax="100"><%= achievements[a.id].per %>%</div>
@@ -13,7 +16,9 @@
       </li>
     <% } else { %>
       <li class="list-group-item">
-        <h6 class="mb-1"><strong><%= a.name %></strong></h6>
+        <h6 class="mb-1"><strong>
+          <a href="https://wiki.guildwars2.com/wiki/<%= a.name %>"><%= a.name %></a>
+        </strong></h6>
         <p class="mb-0"><em>Achievement not yet unlocked.</em></p>
       </li>
     <% } %>
