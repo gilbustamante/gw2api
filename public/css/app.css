@@ -1,3 +1,11 @@
+a {
+    color: rgb(10, 88, 202);
+}
+
+a:hover {
+    color: rgb(118, 175, 255);
+}
+
 body {
     background: rgb(249, 251, 255);
     color: rgb(48, 86, 131);
@@ -58,4 +66,8 @@ span.itemName:active {
 
 .muted {
     opacity: 30%;
+}
+
+.progress-bar {
+    background: rgb(48, 86, 131);
 }
