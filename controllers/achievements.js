@@ -195,7 +195,10 @@ module.exports.renderGriffon = async (req, res) => {
   // Create an object with 'achievement ID' keys and 'progress' values
   for (let a of achievementsRes.data) {
     if (griffonIds.includes(a.id)) {
-      achievements[a.id] = a;
+      // Calculate completion percentage for rendering progress bar
+      const per = Math.round((a.current / a.max) * 100)
+      a.per = per
+      achievements[a.id] = a
     }
   }
 

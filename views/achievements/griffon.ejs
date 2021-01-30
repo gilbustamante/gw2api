@@ -1,14 +1,14 @@
 <%- layout('layouts/boilerplate') %>
 <h1 class="mb-2">Griffon Mount</h1>
 <hr>
-<ul class="list-group p-0">
+<ul class="list-group-flush p-0">
   <% for (let a of griffonAchievements) { %>
     <% if (achievements[a.id]) { %> 
       <li class="list-group-item <%= achievements[a.id].done ? 'muted' : '' %>">
         <h6 class="mb-1"><strong><%= a.name %></strong></h6>
-        <p class="mb-1"><%= achievements[a.id].done %></p>
+        <p class="mb-1"><%= a.requirement %></p>
         <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: 23%" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="progress-bar" role="progressbar" style="width: <%= achievements[a.id].per %>%" aria-valuenow="<%= achievements[a.id].per %>" aria-valuemin="0" aria-valuemax="100"><%= achievements[a.id].per %>%</div>
         </div>
       </li>
     <% } else { %>
