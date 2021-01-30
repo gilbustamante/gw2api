@@ -1,4 +1,5 @@
-// Request details of all achievements
+// Populate database with achievement details
+
 const mongoose    = require('mongoose');
 const axios = require('axios').default;
 const Achievement = require('../models/achievement');
@@ -18,7 +19,7 @@ db.once('open', () => {
 
 const getIds = async () => {
   await Achievement.deleteMany({});
-  console.log('Cleared database')
+  console.log('Cleared achievement collection')
   // First we pull all achievement IDs
   const url = 'https://api.guildwars2.com/v2/achievements';
   const ids = await axios.get(url);
