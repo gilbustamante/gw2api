@@ -166,7 +166,20 @@ module.exports.renderDailies = async (req, res) => {
 }
 
 module.exports.renderGriffon = async (req, res) => {
-  let achievements = [];
+  let achievements = {};
+  let griffonAchievements = [];
+
+  // Griffon-related achievement IDs
+  let griffonIds = [
+    3736,
+    3634,
+    3686,
+    3834,
+    3856,
+    3758,
+    3662,
+    3867
+  ];
 
   // Request header config
   const config = {
@@ -175,17 +188,27 @@ module.exports.renderGriffon = async (req, res) => {
     }
   }
 
+  // Request
   const achievementsUrl = 'https://api.guildwars2.com/v2/account/achievements'
   const achievementsRes = await axios.get(achievementsUrl, config);
 
-  for (let i of achievementsRes.data) {
-    const achievement = await Achievement.findOne({ id: i.id });
-    if (achievement) {
-      achievements.push(achievement)
+  // Create an object with 'achievement ID' keys and 'progress' values
+  for (let a of achievementsRes.data) {
+    if (griffonIds.includes(a.id)) {
+      achievements[a.id] = a;
     }
   }
 
-  res.render('achievements/griffon', { achievements });
+  // Create array of griffon-related achievements
+  for (let id of griffonIds) {
+    const achievement = await Achievement.findOne({ id: id })
+    griffonAchievements.push(achievement)
+  }
+
+  res.render('achievements/griffon', {
+    achievements,
+    griffonAchievements
+  });
 }
 
 const filterAchievements = item => {
