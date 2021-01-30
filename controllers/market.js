@@ -1,4 +1,5 @@
 const axios = require('axios').default;
+const Item = require('../models/item');
 const NodeCache = require('node-cache');
 const gw2cache = new NodeCache();
 
@@ -33,17 +34,14 @@ module.exports.renderMarketHistory = async (req, res) => {
       sellBuffer.push(i.item_id)
     }
 
-    // Retrieve item info (from cache if it exists)
-    const sellItemUrl = 'https://api.guildwars2.com/v2/items?ids='
-    sellDetails = gw2cache.get('sellDetails');
-    if (sellDetails == undefined) {
-      const res = await axios.get(sellItemUrl + sellBuffer.join())
-      sellDetails = res.data;
-      gw2cache.set('sellDetails', res.data, 300)
+    // Retrieve item info from database
+    for (let i of sellBuffer) {
+      const filter = { id: i };
+      const item = await Item.findOne(filter);
+      sellDetails.push(item)
     }
-    
 
-    // Create dictionary with item ID keys and item object values
+    // Populate dictionary with item ID keys and item object values
     for (let i of sellDetails) {
       const id = i.id;
       sellDict[id] = i;
@@ -71,12 +69,11 @@ module.exports.renderMarketHistory = async (req, res) => {
       buyBuffer.push(i.item_id)
     }
 
-    // Retrieve item info (from cache if it exists)
-    buyDetails = gw2cache.get('buyDetails');
-    if (buyDetails == undefined) {
-      const res = await axios.get(sellItemUrl + buyBuffer.join())
-      buyDetails = res.data;
-      gw2cache.set('buyDetails', res.data, 300)
+    // Retrieve item info from database
+    for (let i of buyBuffer) {
+      const filter = { id: i };
+      const item = await Item.findOne(filter);
+      buyDetails.push(item)
     }
 
     // Create dictionary with item ID keys and item object values
