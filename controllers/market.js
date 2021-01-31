@@ -38,7 +38,7 @@ module.exports.renderMarketHistory = async (req, res) => {
     for (let i of sellBuffer) {
       const filter = { id: i };
       const item = await Item.findOne(filter);
-      sellDetails.push(item)
+      sellDetails.push(item);
     }
 
     // Populate dictionary with item ID keys and item object values
@@ -93,6 +93,7 @@ module.exports.renderMarketCurrent = async (req, res) => {
     var sellBuffer = [];
     var sellDict = {};
     var sell = [];
+    var sellDetails = [];
 
     // Request header config
     const config = {
@@ -116,9 +117,15 @@ module.exports.renderMarketCurrent = async (req, res) => {
     // Request item info based on item IDs
     const sellItemUrl = 'https://api.guildwars2.com/v2/items?ids=';
     const sellItemRes = await axios.get(sellItemUrl + sellBuffer.join())
+    // Retrieve item details from database
+    for (let i of sellBuffer) {
+      const filter = { id: i };
+      const item = await Item.findOne(filter);
+      sellDetails.push(item);
+    }
 
     // Create dictionary with item ID keys and item object values
-    for (let i of sellItemRes.data) {
+    for (let i of sellDetails) {
       const id = i.id;
       sellDict[id] = i;
     }
@@ -129,6 +136,7 @@ module.exports.renderMarketCurrent = async (req, res) => {
     var buyBuffer = [];
     var buyDict = {};
     var buy = [];
+    var buyDetails = [];
 
     // Request current buy orders
     const buyMarketUrl = 'https://api.guildwars2.com/v2/commerce/transactions/current/buys'
@@ -142,11 +150,15 @@ module.exports.renderMarketCurrent = async (req, res) => {
       buyBuffer.push(i.item_id)
     }
 
-    // Request item info based on item IDs (using sellItemUrl)
-    const buyItemRes = await axios.get(sellItemUrl + buyBuffer.join())
+    // Retrieve item info from database
+    for (let i of buyBuffer) {
+      const filter = { id: i };
+      const item = await Item.findOne(filter);
+      buyDetails.push(item);
+    }
 
     // Create dictionary with item ID keys and item object values
-    for (let i of buyItemRes.data) {
+    for (let i of buyDetails) {
       const id = i.id;
       buyDict[id] = i;
     }
