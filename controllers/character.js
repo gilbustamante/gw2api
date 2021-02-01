@@ -75,7 +75,7 @@ module.exports.renderWalletInfo = async (req, res) => {
     }
 
     const url = 'https://api.guildwars2.com/v2/account/wallet';
-    wallet = gw2Cache.get('currencies');
+    wallet = gw2Cache.get('wallet');
     if (wallet == undefined) {
       // Request wallet info
       const res = await axios.get(url, config);
