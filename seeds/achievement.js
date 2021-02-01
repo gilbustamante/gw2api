@@ -34,7 +34,7 @@ const getIds = async () => {
 }
 
 // getIds().then(() => {
-//   mongoose.connection.close();
+//   db.close();
 //   console.log('Database disconnected')
 // });
 
@@ -75,6 +75,6 @@ const test = async () => {
 }
 
 // test().then(() => {
-//   mongoose.connection.close();
+//   db.close();
 //   console.log('Database disconnected');
 // });

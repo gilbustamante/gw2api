@@ -10,4 +10,5 @@ router.route('/history')
 
 router.route('/current')
   .get(hasCookie, catchAsync(market.renderMarketCurrent))
+
 module.exports = router;
