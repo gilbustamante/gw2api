@@ -8,13 +8,15 @@ Simple web app that keeps track of things the average [GW2](https://www.guildwar
   * Trading post history (bought and sold) for a given account.
   * Current trading post orders (buy and sell).
   * Given account's bank inventory.
-* Current orders now alert the user if they have been undercut or outbid.
+* View a given account's wallet (Gold, karma, map currencies, etc.).
 
 ### New
-* Item and achievement details (name, id, icon URL, etc.) are now stored in the database, which avoids sending unnecessary requests and results in ~20% faster page loading for the current market listings page (and up to ~50% faster for some other pages).
+* Current orders now alert the user if they have been undercut or outbid.
+* 'Item', 'currency' and 'achievement' details (name, id, icon URL, etc.) are now stored in a database, which avoids sending unnecessary requests and results in ~20% faster page loading for the current market listings page (and up to ~50% faster for some other pages).
 
 ### To Do
 * Add ability to calculate expected profit and/or ROI for an item based on buy price, sell price and listing/exchange fees.
-* More mount progress trackers (possible more achievements as well).
+* More mount progress trackers (possibly more achievements as well).
 * Add some logic to suggest high volume/margin items to flip.
+* Add ability to view a given character's stored talent builds.
 * More account stats!
