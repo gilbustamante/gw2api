@@ -3,7 +3,6 @@ const Achievement = require('../models/achievement');
 const NodeCache = require('node-cache');
 const gw2Cache = new NodeCache();
 
-
 //// Daily Globals
 // Today
 let todayAchievements = {};

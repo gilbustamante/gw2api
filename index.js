@@ -2,42 +2,26 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-/////////////////////////////////////////
-/////////////////////////////////////////
-/////////////////////////////////////////
-/////////////////////////////////////////
-
-// TODO: implement database, save all the
-// item names/info from market routes to 
-// it, then pull from that instead of
-// API request. Then cache all the other
-// requests for like 5 mins. Boom
-
-/////////////////////////////////////////
-/////////////////////////////////////////
-/////////////////////////////////////////
-/////////////////////////////////////////
-
-const express         = require('express');
-const session         = require('express-session');
-const cookieParser    = require('cookie-parser');
-const path            = require('path');
-const ejsMate         = require('ejs-mate');
-const ExpressError    = require('./utils/ExpressError');
-const flash           = require('connect-flash');
-const mongoose        = require('mongoose');
-const app             = express();
+const express           = require('express');
+const session           = require('express-session');
+const cookieParser      = require('cookie-parser');
+const path              = require('path');
+const ejsMate           = require('ejs-mate');
+const ExpressError      = require('./utils/ExpressError');
+const flash             = require('connect-flash');
+const mongoose          = require('mongoose');
+const app               = express();
 
 // Scripts
-const { convertGold } = require('./public/js/convertGold'); // Coin conversion
-const { totalGold } = require('./public/js/totalGold'); // Total gold of orders
-const { format } = require('timeago.js'); // Time formatting
+const { convertGold }   = require('./public/js/convertGold');
+const { totalGold }     = require('./public/js/totalGold');
+const { format }        = require('timeago.js'); // Time formatting
 
 // Requiring Routes
-const achievementRoutes  = require('./routes/achievements');
-const marketRoutes = require('./routes/market');
-const apiRoutes    = require('./routes/api');
-const bankRoutes = require('./routes/bank');
+const achievementRoutes = require('./routes/achievements');
+const marketRoutes      = require('./routes/market');
+const apiRoutes         = require('./routes/api');
+const characterRoutes   = require('./routes/character');
 
 // Database setup
 const database = process.env.DATABASE_URL || 'mongodb://localhost:27017/gw2';
@@ -91,7 +75,7 @@ app.use((req, res, next) => {
 app.use('/achievements', achievementRoutes);
 app.use('/market', marketRoutes);
 app.use('/api', apiRoutes);
-app.use('/bank', bankRoutes);
+app.use('/character', characterRoutes);
 
 // Temp Index
 app.get('/', (req, res) => {

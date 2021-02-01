@@ -1,0 +1,21 @@
+<% layout('./layouts/boilerplate') %>
+<h1>Wallet</h1>
+<hr>
+<ul class="list-group-flush ps-0">
+  <% for (let item of wallet) { %>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-auto">
+          <img src="<%= item.icon %>" width="64" alt="Currency icon">
+        </div>
+        <div class="col">
+          <% if (item.name === 'Coin') { %>
+            <p class="mb-0"><%= item.name %> - <%- convertGold(item.value) %></p>
+          <% } else { %>
+            <p class="mb-0"><%= item.name %> - <%= item.value %></p>
+          <% } %> 
+        </div>
+      </div>
+    </li>
+  <% } %>
+</ul>

@@ -1,4 +1,5 @@
 const axios = require('axios').default;
+const Currency = require('../models/currency');
 const NodeCache = require('node-cache');
 const gw2Cache = new NodeCache();
 
@@ -56,8 +57,43 @@ module.exports.renderBankInfo = async (req, res) => {
       const { id } = item;
       bankObj[id] = item;
     }
+
   } catch (err) {
     console.log(err)
   }
-  res.render('bank', { bank, bankObj });
+  res.render('character/bank', { bank, bankObj });
+}
+
+module.exports.renderWalletInfo = async (req, res) => {
+  let wallet;
+  try {
+    // Request header config
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + req.signedCookies.apiKey
+      }
+    }
+
+    const url = 'https://api.guildwars2.com/v2/account/wallet';
+    wallet = gw2Cache.get('currencies');
+    if (wallet == undefined) {
+      // Request wallet info
+      const res = await axios.get(url, config);
+      wallet = res.data;
+      gw2Cache.set('wallet', wallet, 300) // Five minute TTL
+    }
+
+    // Add name, description, and icon info to currency object
+    for (let item of wallet) {
+      const filter = { id: item.id };
+      // Pull details from database
+      const currency = await Currency.findOne(filter);
+      item.name = currency.name;
+      item.description = currency.description;
+      item.icon = currency.icon;
+    }
+  } catch (err) {
+    console.log(err)
+  }
+  res.render('character/wallet', { wallet });
 }
