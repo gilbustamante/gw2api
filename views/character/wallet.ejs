@@ -11,7 +11,7 @@
           <% if (item.name === 'Coin') { %>
             <p class="mb-0"><%- convertGold(item.value) %></p>
           <% } else { %>
-            <p class="mb-0"><%= item.value %></p>
+            <p class="mb-0"><%= convertNum(item.value) %></p>
           <% } %> 
         </div>
       </div>

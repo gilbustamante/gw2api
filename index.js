@@ -2,20 +2,20 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-const express           = require('express');
-const session           = require('express-session');
-const cookieParser      = require('cookie-parser');
-const path              = require('path');
-const ejsMate           = require('ejs-mate');
-const ExpressError      = require('./utils/ExpressError');
-const flash             = require('connect-flash');
-const mongoose          = require('mongoose');
-const app               = express();
+const express      = require('express');
+const session      = require('express-session');
+const cookieParser = require('cookie-parser');
+const path         = require('path');
+const ejsMate      = require('ejs-mate');
+const ExpressError = require('./utils/ExpressError');
+const flash        = require('connect-flash');
+const mongoose     = require('mongoose');
+const app          = express();
 
 // Scripts
-const { convertGold }   = require('./public/js/convertGold');
-const { totalGold }     = require('./public/js/totalGold');
-const { format }        = require('timeago.js'); // Time formatting
+const { convertGold, convertNum } = require('./public/js/convertGold');
+const { totalGold }               = require('./public/js/totalGold');
+const { format }                  = require('timeago.js'); // Time formatting
 
 // Requiring Routes
 const achievementRoutes = require('./routes/achievements');
@@ -66,8 +66,9 @@ app.use((req, res, next) => {
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   res.locals.convertGold = convertGold;
-  res.locals.timeAgo = format;
+  res.locals.convertNum = convertNum;
   res.locals.totalGold = totalGold;
+  res.locals.timeAgo = format;
   next();
 });
 

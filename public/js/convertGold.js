@@ -15,3 +15,9 @@ module.exports.convertGold = amount => {
   }
   return `${price} <img src="/img/copper.png">`;
 }
+
+// Add commas to large numbers
+module.exports.convertNum = amount => {
+  let number = Number(amount);
+  return number.toLocaleString();
+}
