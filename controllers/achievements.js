@@ -166,11 +166,12 @@ module.exports.renderDailies = async (req, res) => {
 
 module.exports.renderGriffon = async (req, res) => {
   try {
-    let achievements = {};
-    let griffonAchievements = [];
+    var achievements = {};
+    var griffonAchievements = [];
+    var achievementBuffer = [];
 
     // Griffon-related achievement IDs
-    let griffonIds = [
+    var griffonIds = [
       3736, // Sunspear Sanctuary
       3634, // Crystal Oasis
       3686, // Desert Highlands
@@ -188,12 +189,18 @@ module.exports.renderGriffon = async (req, res) => {
       }
     }
 
-    // Request
-    const achievementsUrl = 'https://api.guildwars2.com/v2/account/achievements'
-    const achievementsRes = await axios.get(achievementsUrl, config);
+    // Request or retrieve from cache
+    achievementBuffer = gw2Cache.get('griffon');
+    if (achievementBuffer == undefined) {
+      console.log('Griffon cache miss')
+      const achievementsUrl = 'https://api.guildwars2.com/v2/account/achievements'
+      const res = await axios.get(achievementsUrl, config);
+      achievementBuffer = res.data;
+      gw2Cache.set('griffon', res.data, 300) // Five minute TTL
+    }
 
     // Create an object with 'achievement ID' keys and 'progress' values
-    for (let a of achievementsRes.data) {
+    for (let a of achievementBuffer) {
       if (griffonIds.includes(a.id)) {
         // Calculate completion percentage for rendering progress bar
         const per = Math.round((a.current / a.max) * 100)
@@ -218,11 +225,12 @@ module.exports.renderGriffon = async (req, res) => {
 
 module.exports.renderSkyscale = async (req, res) => {
   try {
-    let achievements = {};
-    let skyscaleAchievements = [];
+    var achievements = {};
+    var skyscaleAchievements = [];
+    var achievementBuffer = [];
 
     // Skyscale-related achievement IDs
-    let skyscaleIds = [
+    var skyscaleIds = [
       4714, // Newborn Skyscales
       4712, // Saving Skyscales
       4693, // Raising Skyscales
@@ -237,11 +245,18 @@ module.exports.renderSkyscale = async (req, res) => {
       }
     }
 
-    // Request
-    const achievementsUrl = 'https://api.guildwars2.com/v2/account/achievements'
-    const achievementsRes = await axios.get(achievementsUrl, config);
+    // Request or retrieve from cache
+    achievementBuffer = gw2Cache.get('skyscale')
+    if (achievementBuffer == undefined) {
+      console.log('Skyscale cache miss')
+      const achievementsUrl = 'https://api.guildwars2.com/v2/account/achievements';
+      const res = await axios.get(achievementsUrl, config);
+      achievementBuffer = res.data;
+      gw2Cache.set('skyscale', res.data, 300) // Five minute TTL
+    }
 
-    for (let a of achievementsRes.data) {
+    // Create object containing achievement IDs and their progress
+    for (let a of achievementBuffer) {
       if (skyscaleIds.includes(a.id)) {
         // Calculate completion percentage
         const per = Math.round((a.current / a.max) * 100)
