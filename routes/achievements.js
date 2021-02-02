@@ -11,4 +11,7 @@ router.route('/daily')
 router.route('/griffon')
   .get(hasCookie, catchAsync(achievements.renderGriffon));
 
+router.route('/skyscale')
+  .get(hasCookie, catchAsync(achievements.renderSkyscale));
+
 module.exports = router;

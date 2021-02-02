@@ -3,26 +3,26 @@ const Achievement = require('../models/achievement');
 const NodeCache = require('node-cache');
 const gw2Cache = new NodeCache();
 
-//// Daily Globals
-// Today
-let todayAchievements = {};
-let todayCats = {};
-let todayDailies = {};
-// Tomorrow
-let tomorrowAchievements = {};
-let tomorrowCats = {};
-let tomorrowDailies = {};
-
-// Today's Quests Endpoint
-const dailyUrl = 'https://api.guildwars2.com/v2/achievements/daily?v=2019-05-16T00:00:00.000Z';
-// Tomorrow's Quests Endpoint
-const dailyTomorrowUrl = 'https://api.guildwars2.com/v2/achievements/daily/tomorrow?v=2019-05-16T00:00:00.000Z'
-// Lookup Quest IDs Endpoint
-const dailyLookupUrl = 'https://api.guildwars2.com/v2/achievements?ids='
-
 module.exports.renderDailies = async (req, res) => {
+  // Today's Quests Endpoint
+  const dailyUrl = 'https://api.guildwars2.com/v2/achievements/daily?v=2019-05-16T00:00:00.000Z';
+  // Tomorrow's Quests Endpoint
+  const dailyTomorrowUrl = 'https://api.guildwars2.com/v2/achievements/daily/tomorrow?v=2019-05-16T00:00:00.000Z'
+  // Lookup Quest IDs Endpoint
+  const dailyLookupUrl = 'https://api.guildwars2.com/v2/achievements?ids='
+
+  // Today
+  let todayAchievements = {};
+  let todayCats = {};
+  let todayDailies = {};
   let todayBuffer = [];
+
+  // Tomorrow
+  let tomorrowAchievements = {};
+  let tomorrowCats = {};
+  let tomorrowDailies = {};
   let tomorrowBuffer = [];
+
   todayCats = {
     'pve': [],
     'pvp': [],
@@ -165,51 +165,102 @@ module.exports.renderDailies = async (req, res) => {
 }
 
 module.exports.renderGriffon = async (req, res) => {
-  let achievements = {};
-  let griffonAchievements = [];
+  try {
+    let achievements = {};
+    let griffonAchievements = [];
 
-  // Griffon-related achievement IDs
-  let griffonIds = [
-    3736,
-    3634,
-    3686,
-    3834,
-    3856,
-    3758,
-    3662,
-    3867
-  ];
+    // Griffon-related achievement IDs
+    let griffonIds = [
+      3736, // Sunspear Sanctuary
+      3634, // Crystal Oasis
+      3686, // Desert Highlands
+      3834, // Elon Riverlands
+      3856, // The Desolation
+      3758, // Domain of Vabbi
+      3662, // Sunspear Wisdom
+      3867  // On Wings and a Prayer
+    ];
 
-  // Request header config
-  const config = {
-    headers: {
-      Authorization: 'Bearer ' + req.signedCookies.apiKey
+    // Request header config
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + req.signedCookies.apiKey
+      }
     }
-  }
 
-  // Request
-  const achievementsUrl = 'https://api.guildwars2.com/v2/account/achievements'
-  const achievementsRes = await axios.get(achievementsUrl, config);
+    // Request
+    const achievementsUrl = 'https://api.guildwars2.com/v2/account/achievements'
+    const achievementsRes = await axios.get(achievementsUrl, config);
 
-  // Create an object with 'achievement ID' keys and 'progress' values
-  for (let a of achievementsRes.data) {
-    if (griffonIds.includes(a.id)) {
-      // Calculate completion percentage for rendering progress bar
-      const per = Math.round((a.current / a.max) * 100)
-      a.per = per
-      achievements[a.id] = a
+    // Create an object with 'achievement ID' keys and 'progress' values
+    for (let a of achievementsRes.data) {
+      if (griffonIds.includes(a.id)) {
+        // Calculate completion percentage for rendering progress bar
+        const per = Math.round((a.current / a.max) * 100)
+        a.per = per
+        achievements[a.id] = a
+      }
     }
-  }
 
-  // Create array of griffon-related achievements
-  for (let id of griffonIds) {
-    const achievement = await Achievement.findOne({ id: id })
-    griffonAchievements.push(achievement)
+    // Create array of griffon-related achievements
+    for (let id of griffonIds) {
+      const achievement = await Achievement.findOne({ id: id })
+      griffonAchievements.push(achievement)
+    }
+  } catch (err) {
+    console.log(err)
   }
-
   res.render('achievements/griffon', {
     achievements,
     griffonAchievements
+  });
+}
+
+module.exports.renderSkyscale = async (req, res) => {
+  try {
+    let achievements = {};
+    let skyscaleAchievements = [];
+
+    // Skyscale-related achievement IDs
+    let skyscaleIds = [
+      4714, // Newborn Skyscales
+      4712, // Saving Skyscales
+      4693, // Raising Skyscales
+      4675, // Troublesome Skyscales
+      4745  // Riding Skyscales
+    ];
+
+    // Request header config
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + req.signedCookies.apiKey
+      }
+    }
+
+    // Request
+    const achievementsUrl = 'https://api.guildwars2.com/v2/account/achievements'
+    const achievementsRes = await axios.get(achievementsUrl, config);
+
+    for (let a of achievementsRes.data) {
+      if (skyscaleIds.includes(a.id)) {
+        // Calculate completion percentage
+        const per = Math.round((a.current / a.max) * 100)
+        a.per = per
+        achievements[a.id] = a
+      }
+    }
+
+    // Create array of skyscale achievements
+    for (let id of skyscaleIds) {
+      const achievement = await Achievement.findOne({ id: id })
+      skyscaleAchievements.push(achievement)
+    }
+  } catch (err) {
+    console.log(err)
+  }
+  res.render('achievements/skyscale', {
+    achievements,
+    skyscaleAchievements
   });
 }
 

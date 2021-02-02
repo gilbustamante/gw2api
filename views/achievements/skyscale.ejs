@@ -1,0 +1,26 @@
+<%- layout('layouts/boilerplate') %>
+<h1 class="mb-2">Skyscale Unlock Tracker</h1>
+<hr>
+<p>Per the <a href="https://wiki.guildwars2.com/wiki/Skyscale#Notes">GW2 Wiki</a>, <strong>access to all season four maps</strong> (six in total). </p>
+<ul class="list-group-flush p-0">
+  <% for (let a of skyscaleAchievements) { %>
+    <% if (achievements[a.id]) { %> 
+      <li class="list-group-item <%= achievements[a.id].done ? 'muted' : '' %>">
+        <h6 class="mb-1"><strong>
+          <a href="https://wiki.guildwars2.com/wiki/<%= a.name %>"><%= a.name %></a>
+        </strong></h6>
+        <p class="mb-1"><%= a.requirement %></p>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: <%= achievements[a.id].per %>%" aria-valuenow="<%= achievements[a.id].per %>" aria-valuemin="0" aria-valuemax="100"><%= achievements[a.id].per %>%</div>
+        </div>
+      </li>
+    <% } else { %>
+      <li class="list-group-item">
+        <h6 class="mb-1"><strong>
+          <a href="https://wiki.guildwars2.com/wiki/<%= a.name %>"><%= a.name %></a>
+        </strong></h6>
+        <p class="mb-0"><em>Achievement not yet unlocked.</em></p>
+      </li>
+    <% } %>
+  <% } %> 
+</ul>
