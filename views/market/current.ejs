@@ -14,7 +14,7 @@
     <% } %>
   </div>
 <% } %>
-<input id="filterInput" class="form-control form-control-lg my-3" type="text" placeholder="Type to search" aria-label="Search input">
+<input id="filterInput" class="form-control form-control-lg my-3" type="text" placeholder="Type to search" aria-label="Search input" autofocus>
 <ul class="nav nav-pills nav-fill mb-2" id="pills-tab" role="tablist">
   <li class="nav-item darkerBlue" role="presentation">
     <a class="nav-link active" id="buy" data-bs-toggle="pill" href="#pills-buy" role="tab" aria-controls="pills-buy" aria-selected="true">Buy Orders (<%= buy.length %>)</a>
@@ -36,7 +36,7 @@
               <div class="col">
                 <strong><p class="mb-0 itemTitle"><span data-bs-toggle="tooltip" data-bs-placement="top" title="Click to copy" class="itemName"><%= buyDict[item.item_id].name %></span> (<%= item.quantity %>)</strong>
                 <p class="m-0">
-                  <%- convertGold(item.price) %> <strong><%= item.price < item.currentBuy ? '(Outbid!)' : '' %></strong>
+                  <%- convertGold(item.price) %> <strong><%- item.price < item.currentBuy ? `(${convertGold(item.currentBuy)})` : '' %></strong>
                 </p>
                 <p class="m-0"><em><%= timeAgo(item.created) %></em></p>
               </div>
@@ -59,7 +59,7 @@
               <div class="col">
                 <strong><p class="mb-0 itemTitle"><span data-bs-toggle="tooltip" data-bs-placement="top" title="Click to copy" class="itemName"><%= sellDict[item.item_id].name %></span> (<%= item.quantity %>)</strong>
                 <p class="m-0">
-                  <%- convertGold(item.price) %> <strong><%= item.price > item.currentSell ? '(Undercut!)' : '' %></strong>
+                  <%- convertGold(item.price) %> <strong><%- item.price > item.currentSell ? `(${convertGold(item.currentSell)})` : '' %></strong>
                 </p>
                 <p class="m-0"><em><%= timeAgo(item.created) %></em></p>
               </div>
