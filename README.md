@@ -19,4 +19,5 @@ Simple web app that keeps track of things the average [GW2](https://www.guildwar
 * More mount progress trackers (possibly more achievements as well).
 * Add some logic to suggest high volume/margin items to flip.
 * Add ability to view a given character's stored talent builds.
+* Add crafting calculator to view recipes with material cost + profit estimates.
 * More account stats!
