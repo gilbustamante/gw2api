@@ -192,7 +192,6 @@ module.exports.renderGriffon = async (req, res) => {
     // Request or retrieve from cache
     achievementBuffer = gw2Cache.get('griffon');
     if (achievementBuffer == undefined) {
-      console.log('Griffon cache miss')
       const achievementsUrl = 'https://api.guildwars2.com/v2/account/achievements'
       const res = await axios.get(achievementsUrl, config);
       achievementBuffer = res.data;
@@ -248,7 +247,6 @@ module.exports.renderSkyscale = async (req, res) => {
     // Request or retrieve from cache
     achievementBuffer = gw2Cache.get('skyscale')
     if (achievementBuffer == undefined) {
-      console.log('Skyscale cache miss')
       const achievementsUrl = 'https://api.guildwars2.com/v2/account/achievements';
       const res = await axios.get(achievementsUrl, config);
       achievementBuffer = res.data;

@@ -9,9 +9,9 @@
         <div class="card-body">
           <h6 class="card-title"><%= item.name %></h6>
           <% if (item.name === 'Coin') { %>
-            <p class="mb-0"><%- convertGold(item.value) %></p>
+            <h5 class="mb-0"><strong><%- convertGold(item.value) %></strong></h5>
           <% } else { %>
-            <p class="mb-0"><%= convertNum(item.value) %></p>
+            <h5 class="mb-0"><strong><%= convertNum(item.value) %></strong></h5>
           <% } %> 
         </div>
       </div>
