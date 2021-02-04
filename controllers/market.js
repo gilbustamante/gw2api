@@ -22,7 +22,7 @@ module.exports.renderMarketHistory = async (req, res) => {
     // Request sell history data
     const sellMarketUrl = 'https://api.guildwars2.com/v2/commerce/transactions/history/sells';
     sell = gw2cache.get('sellHistory');
-    if (sell == undefined) {
+    if (sell === undefined) {
       // Request sell history
       const res = await axios.get(sellMarketUrl, config)
       sell = res.data;
@@ -58,7 +58,7 @@ module.exports.renderMarketHistory = async (req, res) => {
     // Request buy history data
     const buyMarketUrl = 'https://api.guildwars2.com/v2/commerce/transactions/history/buys';
     buy = gw2cache.get('buyHistory');
-    if (buy == undefined) {
+    if (buy === undefined) {
       const res = await axios.get(buyMarketUrl, config)
       buy = res.data;
       gw2cache.set('buyHistory', res.data, 300)

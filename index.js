@@ -21,7 +21,7 @@ const { format }                  = require('timeago.js'); // Time formatting
 const achievementRoutes = require('./routes/achievements');
 const marketRoutes      = require('./routes/market');
 const apiRoutes         = require('./routes/api');
-const characterRoutes   = require('./routes/character');
+const accountRoutes     = require('./routes/account');
 
 // Database setup
 const database = process.env.DATABASE_URL || 'mongodb://localhost:27017/gw2';
@@ -76,7 +76,7 @@ app.use((req, res, next) => {
 app.use('/achievements', achievementRoutes);
 app.use('/market', marketRoutes);
 app.use('/api', apiRoutes);
-app.use('/character', characterRoutes);
+app.use('/account', accountRoutes);
 
 // Temp Index
 app.get('/', (req, res) => {

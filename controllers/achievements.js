@@ -43,14 +43,14 @@ module.exports.renderDailies = async (req, res) => {
   try {
     // Retrieve today/tomorrow dailies from cache, otherwise request data
     todayDailies = gw2Cache.get('today');
-    if (todayDailies == undefined) {
+    if (todayDailies === undefined) {
       // Request Today's Dailies
       const today = await axios.get(dailyUrl);
       todayDailies = today.data;
       gw2Cache.set('today', today.data, 3600) // One hour TTL
     }
     tomorrowDailies = gw2Cache.get('tomorrow');
-    if (tomorrowDailies == undefined) {
+    if (tomorrowDailies === undefined) {
       // Request Tomorrow's Dailies
       const tomorrow = await axios.get(dailyTomorrowUrl);
       tomorrowDailies = tomorrow.data;
@@ -129,13 +129,13 @@ module.exports.renderDailies = async (req, res) => {
 
     // Retrieve today/tomorrow achievements from cache, otherwise request data
     todayAchievements = gw2Cache.get('todayAchievements');
-    if (todayAchievements == undefined) {
+    if (todayAchievements === undefined) {
       const details = await axios.get(dailyLookupUrl + todayBuffer.join());
       todayAchievements = details.data;
       gw2Cache.set('todayAchievements', details.data, 3600) // One hour TTL
     }
     tomorrowAchievements = gw2Cache.get('tomorrowAchievements');
-    if (tomorrowAchievements == undefined) {
+    if (tomorrowAchievements === undefined) {
       const details = await axios.get(dailyLookupUrl + tomorrowBuffer.join());
       tomorrowAchievements = details.data;
       gw2Cache.set('tomorrowAchievements', details.data, 3600) // One hour TTL
@@ -191,7 +191,7 @@ module.exports.renderGriffon = async (req, res) => {
 
     // Request or retrieve from cache
     achievementBuffer = gw2Cache.get('griffon');
-    if (achievementBuffer == undefined) {
+    if (achievementBuffer === undefined) {
       const achievementsUrl = 'https://api.guildwars2.com/v2/account/achievements'
       const res = await axios.get(achievementsUrl, config);
       achievementBuffer = res.data;
@@ -246,7 +246,7 @@ module.exports.renderSkyscale = async (req, res) => {
 
     // Request or retrieve from cache
     achievementBuffer = gw2Cache.get('skyscale')
-    if (achievementBuffer == undefined) {
+    if (achievementBuffer === undefined) {
       const achievementsUrl = 'https://api.guildwars2.com/v2/account/achievements';
       const res = await axios.get(achievementsUrl, config);
       achievementBuffer = res.data;
