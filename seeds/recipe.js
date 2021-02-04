@@ -27,22 +27,35 @@ const getDetails = async () => {
     const res = await axios.get(url);
     // Create document for each recipe
     for (let r of res.data) {
-      const item = await Item.findOne({ id: r.output_item_id} );
-      const recipe = new Recipe({
-        id: r.id,
-        name: item.name,
-        icon: item.icon,
-        type: r.type,
-        output_id: r.output_item_id,
-        output_num: r.output_item_count,
-        disciplines: r.disciplines,
-        min_rating: r.min_rating,
-        flags: r.flags,
-        ingredients: r.ingredients,
-        chat_link: r.chat_link
-      });
-      await recipe.save()
-      console.log(`Created recipe: ${recipe.name}`)
+      // TODO:
+      // For some reason, 'GuildDecoration' recipes cause the object
+      // creation to break so I'll figure out a real fix later.
+      if (r.type === 'GuildDecoration') {
+        console.log(`Ignoring 'GuildDecoration' recipe: ${r.id}`)
+        continue;
+      }
+
+      // Create recipe object and save to database
+      try {
+        const item = await Item.findOne({ id: r.output_item_id} );
+        const recipe = new Recipe({
+          id: r.id,
+          name: item.name,
+          icon: item.icon,
+          type: r.type,
+          output_id: r.output_item_id,
+          output_num: r.output_item_count,
+          disciplines: r.disciplines,
+          min_rating: r.min_rating,
+          flags: r.flags,
+          ingredients: r.ingredients,
+          chat_link: r.chat_link
+        });
+        await recipe.save()
+        console.log(`Created recipe: ${recipe.name} [${recipe.id}]`)
+      } catch (err) {
+        console.log(`Could not find/add: ${r.id}`)
+      }
     }
   }
   console.log('Done')
