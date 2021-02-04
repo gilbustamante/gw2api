@@ -1,8 +1,8 @@
-const axios = require('axios').default;
-const ExpressError = require('../utils/ExpressError');
-const Currency = require('../models/currency');
-const NodeCache = require('node-cache');
-const gw2Cache = new NodeCache();
+const axios        = require('axios').default;
+const Currency     = require('../models/currency');
+const Recipe       = require('../models/recipe');
+const NodeCache    = require('node-cache');
+const gw2Cache     = new NodeCache();
 
 // Render Bank filter page
 module.exports.renderBankInfo = async (req, res) => {
@@ -97,6 +97,8 @@ module.exports.renderWalletInfo = async (req, res) => {
 }
 
 module.exports.renderCraftingInfo = async (req, res) => {
+  let recipes = {};
+  let recipeIds = [];
   try {
     // Request header
     const config = {
@@ -107,18 +109,20 @@ module.exports.renderCraftingInfo = async (req, res) => {
 
     // Retrieve or request given account's unlocked recipe IDs
     const url = 'https://api.guildwars2.com/v2/account/recipes/';
-    recipes = gw2Cache.get('recipes');
-    if (recipes === undefined) {
+    recipeIds = gw2Cache.get('recipes');
+    if (recipeIds === undefined) {
       const res = await axios.get(url, config);
-      recipes = res.data;
+      recipeIds = res.data;
       gw2Cache.set('recipes', res.data, 600) // Ten minute TTL
     }
 
     // Match recipe IDs with details in database
-
-
+    for (let item of recipeIds) {
+      const foundRecipe = await Recipe.findOne({ id: item })
+      recipes[item] = foundRecipe;
+    }
   } catch (err) {
     console.log(err)
   }
-  res.render('account/crafting');
+  res.render('account/crafting', { recipes, recipeIds });
 }

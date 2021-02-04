@@ -1,3 +1,15 @@
 <% layout('./layouts/boilerplate') %>
 <h1>Crafting</h1>
 <hr>
+<ul class="list-group">
+  <% for (let [id, recipe] of Object.entries(recipes)) { %>
+    <li class="list-group-item">
+      <p class="m-0">
+        <%= recipe.name %>
+      </p>
+      <p class="m-0">
+        <%= recipe.flags %>
+      </p>
+    </li>
+  <% } %> 
+</ul>
