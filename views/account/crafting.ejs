@@ -11,14 +11,14 @@
         </div>
         <div class="col">
           <p class="m-0">
-            <strong><%= recipe.name %></strong>
+            <strong><a href="https://wiki.guildwars2.com/wiki/<%= recipe.name %>"><%= recipe.name %></a></strong> (<%= recipe.min_rating %>)
           </p>
           <div class="table-responsive">
             <table class="table table-sm">
               <thead>
                 <tr>
                   <th scope="col" style="width: 10px;">Qty</th>
-                  <th scope="col">Item</th>
+                  <th scope="col">Ingredient</th>
                 </tr>
               </thead>
               <tbody>
@@ -31,15 +31,6 @@
               </tbody>
             </table>
           </div>
-          <!-- <ul class="list-group-flush ps-1">
-            <li class="list-group-item">
-              <% for (let i of recipe.ingredients) { %>
-                <p class="m-0">
-                  <%= i.count %> x <%= i.name %>
-                </p>
-              <% } %> 
-            </li>
-          </ul> -->
         </div>
       </div>
     </li>
