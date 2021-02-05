@@ -1,5 +1,6 @@
 const axios        = require('axios').default;
 const Currency     = require('../models/currency');
+const Item         = require('../models/item');
 const Recipe       = require('../models/recipe');
 const NodeCache    = require('node-cache');
 const gw2Cache     = new NodeCache();

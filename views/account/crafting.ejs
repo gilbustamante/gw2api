@@ -1,15 +1,47 @@
 <% layout('./layouts/boilerplate') %>
 <h1>Crafting</h1>
 <hr>
-<ul class="list-group">
+<p>Unlocked Recipes:</p>
+<ul class="list-group-flush ps-0">
   <% for (let [id, recipe] of Object.entries(recipes)) { %>
     <li class="list-group-item">
-      <p class="m-0">
-        <%= recipe.name %>
-      </p>
-      <p class="m-0">
-        <%= recipe.flags %>
-      </p>
+      <div class="row">
+        <div class="col-auto">
+          <img class="rounded" width="64" src="<%= recipe.icon %>" alt="<%= recipe.name %>">
+        </div>
+        <div class="col">
+          <p class="m-0">
+            <strong><%= recipe.name %></strong>
+          </p>
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 10px;">Qty</th>
+                  <th scope="col">Item</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i of recipe.ingredients) { %>
+                  <tr>
+                    <td><%= i.count %></td>
+                    <td><%= i.name %></td>
+                  </tr>
+                <% } %> 
+              </tbody>
+            </table>
+          </div>
+          <!-- <ul class="list-group-flush ps-1">
+            <li class="list-group-item">
+              <% for (let i of recipe.ingredients) { %>
+                <p class="m-0">
+                  <%= i.count %> x <%= i.name %>
+                </p>
+              <% } %> 
+            </li>
+          </ul> -->
+        </div>
+      </div>
     </li>
   <% } %> 
 </ul>
