@@ -14,7 +14,9 @@ const RecipeSchema = new Schema({
   ingredients: [
     {
       item_id: Number,
-      count: Number
+      count: Number,
+      name: String,
+      icon: String,
     }
   ],
   chat_link: String

@@ -51,12 +51,21 @@ const getDetails = async () => {
           ingredients: r.ingredients,
           chat_link: r.chat_link
         });
+
+        // Add each ingredient name and icon
+        for (let ingr of recipe.ingredients) {
+          const ingredient = await Item.findOne({ id: ingr.item_id })
+          ingr.name = ingredient.name;
+          ingr.icon = ingredient.icon;
+        }
+
         await recipe.save()
         console.log(`Created recipe: ${recipe.name} [${recipe.id}]`)
       } catch (err) {
         console.log(`Could not find/add: ${r.id}`)
       }
     }
+    console.log(`FINISH PAGE: ${i}`)
   }
   console.log('Done')
 }
