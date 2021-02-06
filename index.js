@@ -54,7 +54,7 @@ const sessionConfig = {
   cookie: {
     httpOnly: true,
     sameSite: 'strict',
-    expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // One week expiration
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 30, // 30 days expiration
     maxAge: 1000 * 60 * 60 * 24 * 7
   }
 }
@@ -83,7 +83,7 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-// 404 Error
+// 404
 app.all('*', (req, res, next) => {
   next(new ExpressError('Page Not Found', 404));
 });

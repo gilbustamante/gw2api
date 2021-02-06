@@ -14,7 +14,8 @@
             <strong><a href="https://wiki.guildwars2.com/wiki/<%= recipe.name %>"><%= recipe.name %></a></strong> (<%= recipe.min_rating %>)
           </p>
           <div class="table-responsive">
-            <table class="table table-sm">
+            <p class="mb-0"><%= recipe.disciplines.join(', ') %></p>
+            <table class="table table-sm table-hover">
               <thead>
                 <tr>
                   <th scope="col" style="width: 10px;">Qty</th>
