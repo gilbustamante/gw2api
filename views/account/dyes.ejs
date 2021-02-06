@@ -1,0 +1,19 @@
+<% layout('./layouts/boilerplate') %>
+<h1>Dyes</h1>
+<hr>
+<p>Total Unlocked Dyes: <%= dyeIds.length %> </p>
+<div class="d-flex row row-cols-1 row-cols-md-3 row-cols-xl-5 g-2">
+  <% for (let [id, dye] of Object.entries(dyes)) { %>
+    <div class="col text-center">
+      <div class="p-2 m-0 border" style="
+        color: white;
+        text-shadow: 2px 2px 2px black;
+        background: rgb(
+          <%= dye.rgb[0] %>,
+          <%= dye.rgb[1] %>,
+          <%= dye.rgb[2] %>
+        );"
+      ><%= dye.name %></div>
+    </div>
+  <% } %>
+</div>

@@ -16,4 +16,8 @@ router.route('/wallet')
 router.route('/crafting')
   .get(hasCookie, catchAsync(account.renderCraftingInfo))
 
+// Dyes
+router.route('/dyes')
+  .get(hasCookie, catchAsync(account.renderDyeInfo))
+
 module.exports = router;

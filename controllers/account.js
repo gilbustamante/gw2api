@@ -1,20 +1,21 @@
-const axios        = require('axios').default;
-const Currency     = require('../models/currency');
-const Item         = require('../models/item');
-const Recipe       = require('../models/recipe');
-const NodeCache    = require('node-cache');
-const gw2Cache     = new NodeCache();
+const axios     = require('axios').default;
+const Currency  = require('../models/currency');
+const Dye       = require('../models/dye');
+const Recipe    = require('../models/recipe');
+const NodeCache = require('node-cache');
+const gw2Cache  = new NodeCache();
+
 
 // Render Bank filter page
 module.exports.renderBankInfo = async (req, res) => {
-  try {
-    // Request header config
-    const config = {
-      headers: {
-        Authorization: 'Bearer ' + req.signedCookies.apiKey
-      }
+  // Request header
+  var config = {
+    headers: {
+      Authorization: 'Bearer ' + req.signedCookies.apiKey
     }
+  }
 
+  try {
     let bankItems = [];
     let itemDetails = [];
     var bank = [];
@@ -64,15 +65,15 @@ module.exports.renderBankInfo = async (req, res) => {
 }
 
 module.exports.renderWalletInfo = async (req, res) => {
+  // Request header
+  var config = {
+    headers: {
+      Authorization: 'Bearer ' + req.signedCookies.apiKey
+    }
+  }
+
   let wallet;
   try {
-    // Request header config
-    const config = {
-      headers: {
-        Authorization: 'Bearer ' + req.signedCookies.apiKey
-      }
-    }
-
     const url = 'https://api.guildwars2.com/v2/account/wallet';
     wallet = gw2Cache.get('wallet');
     if (wallet === undefined) {
@@ -98,16 +99,16 @@ module.exports.renderWalletInfo = async (req, res) => {
 }
 
 module.exports.renderCraftingInfo = async (req, res) => {
+  // Request header
+  var config = {
+    headers: {
+      Authorization: 'Bearer ' + req.signedCookies.apiKey
+    }
+  }
+
   let recipes = {};
   let recipeIds = [];
   try {
-    // Request header
-    const config = {
-      headers: {
-        Authorization: 'Bearer ' + req.signedCookies.apiKey
-      }
-    }
-
     // Retrieve or request given account's unlocked recipe IDs
     const url = 'https://api.guildwars2.com/v2/account/recipes/';
     recipeIds = gw2Cache.get('recipes');
@@ -126,4 +127,34 @@ module.exports.renderCraftingInfo = async (req, res) => {
     console.log(err)
   }
   res.render('account/crafting', { recipes, recipeIds });
+}
+
+module.exports.renderDyeInfo = async (req, res) => {
+  // Request header
+  var config = {
+    headers: {
+      Authorization: 'Bearer ' + req.signedCookies.apiKey
+    }
+  }
+
+  let dyes = {};
+  let dyeIds = [];
+  try {
+    const url = 'https://api.guildwars2.com/v2/account/dyes';
+    dyeIds = gw2Cache.get('dyes');
+    if (dyeIds === undefined) {
+      const res = await axios.get(url, config);
+      dyeIds = res.data;
+      gw2Cache.set('dyes', res.data, 600) // Ten minute TTL
+    }
+
+    // Match dye IDs with details in database
+    for (let item of dyeIds) {
+      const foundDye = await Dye.findOne({ id: item })
+      dyes[item] = foundDye;
+    }
+  } catch (err) {
+    console.log(err)
+  }
+  res.render('account/dyes', { dyes, dyeIds });
 }
