@@ -1,8 +1,8 @@
 // Populate database with item details
 
 const mongoose = require('mongoose');
-const axios = require('axios').default;
-const Item = require('../models/item');
+const axios    = require('axios').default;
+const Item     = require('../models/item');
 
 const dbUrl = process.DATABASE_URL || 'mongodb://localhost:27017/gw2';
 mongoose.connect(dbUrl, {
