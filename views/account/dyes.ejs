@@ -6,14 +6,14 @@
   <% for (let [id, dye] of Object.entries(dyes)) { %>
     <div class="col text-center">
       <div class="p-2 m-0 border" style="
-        color: white;
-        text-shadow: 2px 2px 2px black;
+        color: rgb(255, 255, 255);
+        text-shadow: 2px 2px 2px rgb(0, 0, 0);
         background: rgb(
           <%= dye.rgb[0] %>,
           <%= dye.rgb[1] %>,
           <%= dye.rgb[2] %>
-        );"
-      ><%= dye.name %></div>
+        );"><%= dye.name %>
+      </div>
     </div>
   <% } %>
 </div>

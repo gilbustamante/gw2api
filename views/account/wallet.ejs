@@ -5,7 +5,7 @@
   <% for (let item of wallet) { %>
     <div class="col">
       <div class="card m-0 currencyCard text-center">
-        <img src="<%= item.icon %>" class="mt-4 mx-auto" width="64" alt="Currency icon">
+        <img src="<%= item.icon %>" class="mt-4 mx-auto rounded" width="64" alt="Currency icon">
         <div class="card-body">
           <h6 class="card-title"><%= item.name %></h6>
           <% if (item.name === 'Coin') { %>
