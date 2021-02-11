@@ -20,4 +20,8 @@ router.route('/crafting')
 router.route('/dyes')
   .get(hasCookie, catchAsync(account.renderDyeInfo))
 
+// Materials
+router.route('/materials')
+  .get(hasCookie, catchAsync(account.renderMaterialsInfo))
+
 module.exports = router;

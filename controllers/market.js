@@ -191,7 +191,7 @@ module.exports.renderMarketCurrent = async (req, res) => {
     // GW2 API has a 'max items per request' limit of 200
     // TODO: handle this error if encountered
     if (allOrders.length > 200) {
-      console.log('Total orders is greater than 200, some results will not be found...')
+      console.log('Total items is greater than 200, some results will not be found...')
     }
 
     // Request listing info

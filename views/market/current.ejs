@@ -48,7 +48,7 @@
   </div>
   <div class="tab-pane fade" id="pills-sell" role="tabpanel" aria-labelledby="sell">
     <div class="pt-2">
-      <p>Expected Profit: <%- convertGold(totalGold(sell)) %></p>
+      <p>Expected Profit: <%- convertGold(totalGold(sell)) %> (after fees)</p>
       <ul class="list-group-flush p-0">
         <% for (let item of sell) { %> 
           <li class="list-group-item <%= item.price > item.currentSell ? 'warning' : '' %>">

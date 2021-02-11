@@ -1,0 +1,8 @@
+<% layout('./layouts/boilerplate') %>
+<h1>Material Storage</h1>
+<hr>
+<ul>
+  <% for (let [id, item] of Object.entries(materials)) { %>
+    <li><%= id %> - <%= item.name %> (<%= item.count %>)</li>
+  <% } %>
+</ul>

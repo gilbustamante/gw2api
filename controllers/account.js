@@ -1,6 +1,7 @@
 const axios     = require('axios').default;
 const Currency  = require('../models/currency');
 const Dye       = require('../models/dye');
+const Item      = require('../models/item');
 const Recipe    = require('../models/recipe');
 const NodeCache = require('node-cache');
 const gw2Cache  = new NodeCache();
@@ -157,4 +158,34 @@ module.exports.renderDyeInfo = async (req, res) => {
     console.log(err)
   }
   res.render('account/dyes', { dyes, dyeIds });
+}
+
+module.exports.renderMaterialsInfo = async (req, res) => {
+  // Request header
+  var config = {
+    headers: {
+      Authorization: 'Bearer ' + req.signedCookies.apiKey
+    }
+  }
+
+  let materials = {};
+
+  try {
+    const url = "https://api.guildwars2.com/v2/account/materials";
+    const res = await axios.get(url, config);
+
+    // Create object with item ID keys and item values
+    for (let item of res.data) {
+      const { id } = item;
+      const foundMaterial = await Item.findOne({ id: id });
+      foundMaterial.category = item.category;
+      foundMaterial.binding = item.binding;
+      foundMaterial.count = item.count;
+      materials[id] = foundMaterial;
+    }
+
+  } catch (err) {
+    console.log(err)
+  }
+  res.render('account/materials', { materials });
 }
