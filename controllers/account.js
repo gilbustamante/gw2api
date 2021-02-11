@@ -172,10 +172,15 @@ module.exports.renderMaterialsInfo = async (req, res) => {
 
   try {
     const url = "https://api.guildwars2.com/v2/account/materials";
-    const res = await axios.get(url, config);
+    materialRes = gw2Cache.get('materials');
+    if (materialRes === undefined) {
+      const res = await axios.get(url, config);
+      materialRes = res.data;
+      gw2Cache.set('materials', res.data, 600) // Ten minute TTL
+    }
 
     // Create object with item ID keys and item values
-    for (let item of res.data) {
+    for (let item of materialRes) {
       const { id } = item;
       const foundMaterial = await Item.findOne({ id: id });
       foundMaterial.category = item.category;
