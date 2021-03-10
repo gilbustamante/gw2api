@@ -65,6 +65,7 @@ module.exports.renderBankInfo = async (req, res) => {
   res.render('account/bank', { bank, bankObj });
 }
 
+// Render Wallet page
 module.exports.renderWalletInfo = async (req, res) => {
   // Request header
   var config = {
@@ -99,6 +100,7 @@ module.exports.renderWalletInfo = async (req, res) => {
   res.render('account/wallet', { wallet });
 }
 
+// Render crafting recipe page
 module.exports.renderCraftingInfo = async (req, res) => {
   // Request header
   var config = {
@@ -130,6 +132,7 @@ module.exports.renderCraftingInfo = async (req, res) => {
   res.render('account/crafting', { recipes, recipeIds });
 }
 
+// Render dye page
 module.exports.renderDyeInfo = async (req, res) => {
   // Request header
   var config = {
@@ -160,6 +163,7 @@ module.exports.renderDyeInfo = async (req, res) => {
   res.render('account/dyes', { dyes, dyeIds });
 }
 
+// Render materials page
 module.exports.renderMaterialsInfo = async (req, res) => {
   // Request header
   var config = {
@@ -188,9 +192,8 @@ module.exports.renderMaterialsInfo = async (req, res) => {
       foundMaterial.count = item.count;
       materials[id] = foundMaterial;
     }
-
   } catch (err) {
-    console.log(err)
+    console.log(err) // TODO: handle error if any
   }
   res.render('account/materials', { materials });
 }

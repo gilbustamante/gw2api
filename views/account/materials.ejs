@@ -4,7 +4,6 @@
 <ul>
   <% for (let [id, item] of Object.entries(materials)) { %>
     <li class="<% item.count === 0 ? 'muted' : '' %>">
-      <img src="<%= item.icon %>" alt="<%= item.name %>">
       <%= item.name %> (<%= item.count %>)
     </li>
   <% } %>

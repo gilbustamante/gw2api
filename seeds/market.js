@@ -62,7 +62,7 @@ const getDetails = async () => {
   console.log('Done')
 }
 
-// getDetails().then(() => {
-//   mongoose.connection.close();
-//   console.log('Database disconnected');
-// });
+getDetails().then(() => {
+  mongoose.connection.close();
+  console.log('Database disconnected');
+});
