@@ -44,7 +44,7 @@ module.exports.renderMarketHistory = async (req, res) => {
     // Populate dictionary with item ID keys and item object values
     for (let i of sellDetails) {
       const id = i.id;
-      sellDict[id] = i;
+      sellDict[ id ] = i;
     }
 
     ///////////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ module.exports.renderMarketHistory = async (req, res) => {
     // Create dictionary with item ID keys and item object values
     for (let i of buyDetails) {
       const id = i.id;
-      buyDict[id] = i;
+      buyDict[ id ] = i;
     }
   } catch (err) {
     console.log(err)
@@ -127,9 +127,9 @@ module.exports.renderMarketCurrent = async (req, res) => {
     // Create dictionary with item ID keys and item object values
     for (let i of sellDetails) {
       const id = i.id;
-      sellDict[id] = i;
+      sellDict[ id ] = i;
     }
-    
+
     ///////////////////////////////////////////////////////////
 
     // Buy Orders
@@ -160,7 +160,7 @@ module.exports.renderMarketCurrent = async (req, res) => {
     // Create dictionary with item ID keys and item object values
     for (let i of buyDetails) {
       const id = i.id;
-      buyDict[id] = i;
+      buyDict[ id ] = i;
     }
 
     ///////////////////////////////////////////////////////////
@@ -183,11 +183,11 @@ module.exports.renderMarketCurrent = async (req, res) => {
     ///////////////////////////////////////////////////////////
 
     // Pulling current listing prices
-    
+
     // Make a new array of every unique order listed
     const tempSet = new Set(sellBuffer.concat(buyBuffer));
     const allOrders = Array.from(tempSet);
-    
+
     // GW2 API has a 'max items per request' limit of 200
     // TODO: handle this error if encountered
     if (allOrders.length > 200) {
@@ -219,4 +219,12 @@ module.exports.renderMarketCurrent = async (req, res) => {
     console.log(err);
   }
   res.render('market/current', { sell, sellDict, buy, buyDict, delivery })
+}
+
+module.exports.renderMarketWatchlist = async (req, res) => {
+  res.render('market/watchlist')
+}
+
+module.exports.MarketSearch = async (req, res) => {
+  res.send(req.body)
 }

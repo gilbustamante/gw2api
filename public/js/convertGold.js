@@ -3,7 +3,7 @@ module.exports.convertGold = amount => {
   if (price.length > 4) {
     const copper = price.slice(-2); // last 2 digits
     const silver = price.slice(-4, -2); // next 2
-    const gold   = price.slice(0, -4); // everything else
+    const gold = price.slice(0, -4); // everything else
     return `${gold} <img src="/img/gold.png"> 
             ${silver} <img src="/img/silver.png"> 
             ${copper} <img src="/img/copper.png">`;

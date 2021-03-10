@@ -1,0 +1,17 @@
+<%- layout("layouts/boilerplate") %>
+<div class="d-flex justify-content-between">
+  <div>
+    <h1>Watchlist</h1>
+  </div>
+  <div>
+    <button class="btn">Update</button>
+  </div>
+</div>
+<hr>
+<form action="/market/watchlist" method="POST">
+  <div class="input-group mb-3">
+    <input id="filterInput" class="form-control form-control-lg" type="text" placeholder="Search for item to watch"
+      name="marketSearch">
+    <button class="btn">Search</button>
+  </div>
+</form>

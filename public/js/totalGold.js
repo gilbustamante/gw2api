@@ -1,3 +1,4 @@
+// Returns the expected net profit from all sell orders
 module.exports.totalGold = arr => {
   let allPrices = [];
   for (let item of arr) {
