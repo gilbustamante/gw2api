@@ -222,7 +222,8 @@ module.exports.renderMarketCurrent = async (req, res) => {
 }
 
 module.exports.renderMarketWatchlist = async (req, res) => {
-  res.render('market/watchlist')
+  let items;
+  res.render('market/watchlist', { items })
 }
 
 module.exports.MarketSearch = async (req, res) => {
