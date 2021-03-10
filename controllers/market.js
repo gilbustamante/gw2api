@@ -226,5 +226,9 @@ module.exports.renderMarketWatchlist = async (req, res) => {
 }
 
 module.exports.MarketSearch = async (req, res) => {
-  res.send(req.body)
+  const searchQuery = req.body.marketSearch;
+  console.log(searchQuery);
+  const foundItems = await Item.find({ 'name': searchQuery });
+  console.log(foundItems)
+  res.render('market/watchlist', { items: foundItems })
 }

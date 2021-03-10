@@ -15,3 +15,21 @@
     <button class="btn">Search</button>
   </div>
 </form>
+<% if (items) { %>
+<ul class="list-group list-group-flush">
+  <% for (let item of items) { %>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-auto">
+        <img src="<%= item.icon %>" class="rounded" alt="Item icon">
+      </div>
+      <div class="col">
+        <%= item.name %>
+        <br>
+        Level: <%= item.level %>
+      </div>
+    </div>
+  </li>
+  <% } %>
+</ul>
+<% } %>
