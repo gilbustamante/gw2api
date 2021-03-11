@@ -4,7 +4,7 @@
     <h1>Watchlist</h1>
   </div>
   <div>
-    <button class="btn">Update</button>
+    <button id="ajaxBtn" class="btn">Update</button>
   </div>
 </div>
 <hr>
@@ -33,3 +33,31 @@
   <% } %>
 </ul>
 <% } %>
+<script>
+  (function () {
+    var httpRequest;
+    document.getElementById('ajaxBtn').addEventListener('click', makeRequest);
+
+    function makeRequest() {
+      httpRequest = new XMLHttpRequest();
+
+      if (!httpRequest) {
+        alert('Cannot create XMLHTTP instance');
+        return false;
+      }
+      httpRequest.onreadystatechange = alertContents;
+      httpRequest.open('GET', 'http://localhost:3000/test');
+      httpRequest.send();
+    }
+
+    function alertContents() {
+      if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        if (httpRequest.status === 200) {
+          alert(httpRequest.responseText);
+        } else {
+          alert('There was a problem with the request.')
+        }
+      }
+    }
+  })();
+</script>
