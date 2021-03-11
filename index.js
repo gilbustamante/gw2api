@@ -83,16 +83,6 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-// Test AJAX 
-app.get('/test', (req, res) => {
-  const test = {
-    'a': 1,
-    'b': true,
-    'c': 'Hello'
-  }
-  res.send(test);
-});
-
 // 404
 app.all('*', (req, res, next) => {
   next(new ExpressError('Page Not Found', 404));

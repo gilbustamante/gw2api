@@ -227,7 +227,9 @@ module.exports.renderMarketLookup = async (req, res) => {
 module.exports.MarketSearch = async (req, res) => {
   // RegEx to let users case-insensitive partial search 
   const searchQuery = new RegExp(req.body.marketSearch, 'i');
-  const foundItems = await Item.find({ name: searchQuery });
-  console.log(foundItems)
+  let foundItems = await Item.find({ name: searchQuery });
+  if (foundItems.length > 50) {
+    foundItems = foundItems.slice(0, 50)
+  }
   res.render('market/lookup', { items: foundItems })
 }

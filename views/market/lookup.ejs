@@ -4,7 +4,7 @@
 <form action="/market/lookup" method="POST">
   <div class="input-group mb-3">
     <input id="filterInput" class="form-control form-control-lg" type="text" placeholder="Search for an item"
-      name="marketSearch" minlength="0">
+      name="marketSearch" minlength="3" autofocus>
     <button class="btn">Search</button>
   </div>
 </form>
@@ -24,5 +24,10 @@
     </div>
   </li>
   <% } %>
+  <% if (items.length === 0) { %>
+  <li class="list-group-item">
+    No items found.
+  </li>
+  <% } %>
+  <% } %>
 </ul>
-<% } %>

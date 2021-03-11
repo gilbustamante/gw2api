@@ -13,6 +13,6 @@ router.route('/current')
 
 router.route('/lookup')
   .get(hasCookie, catchAsync(market.renderMarketLookup))
-  .post(catchAsync(market.MarketSearch))
+  .post(hasCookie, catchAsync(market.MarketSearch))
 
 module.exports = router;
