@@ -1,0 +1,28 @@
+<%- layout("layouts/boilerplate") %>
+<h1>Lookup</h1>
+<hr>
+<form action="/market/lookup" method="POST">
+  <div class="input-group mb-3">
+    <input id="filterInput" class="form-control form-control-lg" type="text" placeholder="Search for an item"
+      name="marketSearch" minlength="0">
+    <button class="btn">Search</button>
+  </div>
+</form>
+<% if (items) { %>
+<ul class="list-group list-group-flush">
+  <% for (let item of items) { %>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-auto">
+        <img src="<%= item.icon %>" class="rounded" alt="Item icon" width="64">
+      </div>
+      <div class="col">
+        <span class="itemName"><%= item.name %></span>
+        <br>
+        Level: <%= item.level %>
+      </div>
+    </div>
+  </li>
+  <% } %>
+</ul>
+<% } %>

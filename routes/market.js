@@ -11,8 +11,8 @@ router.route('/history')
 router.route('/current')
   .get(hasCookie, catchAsync(market.renderMarketCurrent))
 
-router.route('/watchlist')
-  .get(hasCookie, catchAsync(market.renderMarketWatchlist))
+router.route('/lookup')
+  .get(hasCookie, catchAsync(market.renderMarketLookup))
   .post(catchAsync(market.MarketSearch))
 
 module.exports = router;

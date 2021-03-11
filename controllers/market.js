@@ -114,9 +114,6 @@ module.exports.renderMarketCurrent = async (req, res) => {
       sellBuffer.push(i.item_id)
     }
 
-    // Request item info based on item IDs
-    const sellItemUrl = 'https://api.guildwars2.com/v2/items?ids=';
-    const sellItemRes = await axios.get(sellItemUrl + sellBuffer.join())
     // Retrieve item details from database
     for (let i of sellBuffer) {
       const filter = { id: i };
@@ -221,13 +218,16 @@ module.exports.renderMarketCurrent = async (req, res) => {
   res.render('market/current', { sell, sellDict, buy, buyDict, delivery })
 }
 
-module.exports.renderMarketWatchlist = async (req, res) => {
+module.exports.renderMarketLookup = async (req, res) => {
+  // Need to declare and send empty `items` so lookup page doesn't complain
   let items;
-  res.render('market/watchlist', { items })
+  res.render('market/lookup', { items })
 }
 
 module.exports.MarketSearch = async (req, res) => {
-  const searchQuery = req.body.marketSearch;
-  const foundItems = await Item.find({ 'name': searchQuery });
-  res.render('market/watchlist', { items: foundItems })
+  // RegEx to let users case-insensitive partial search 
+  const searchQuery = new RegExp(req.body.marketSearch, 'i');
+  const foundItems = await Item.find({ name: searchQuery });
+  console.log(foundItems)
+  res.render('market/lookup', { items: foundItems })
 }
