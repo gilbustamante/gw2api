@@ -1,7 +1,7 @@
-const axios = require('axios').default;
-const Item = require('../models/item');
+const axios     = require('axios').default;
+const Item      = require('../models/item');
 const NodeCache = require('node-cache');
-const gw2cache = new NodeCache();
+const gw2cache  = new NodeCache();
 
 // TODO: add validation for apiKey
 
@@ -186,9 +186,8 @@ module.exports.renderMarketCurrent = async (req, res) => {
     const allOrders = Array.from(tempSet);
 
     // GW2 API has a 'max items per request' limit of 200
-    // TODO: handle this error if encountered
     if (allOrders.length > 200) {
-      console.log('Total items is greater than 200, some results will not be found...')
+      console.log('Total items is >200, some results will be truncated...');
     }
 
     // Request listing info
