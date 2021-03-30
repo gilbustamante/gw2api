@@ -1,7 +1,7 @@
 // Populate database with achievement details
 
 const mongoose    = require('mongoose');
-const axios = require('axios').default;
+const axios       = require('axios').default;
 const Achievement = require('../models/achievement');
 
 const database = process.env.DATABASE_URL || 'mongodb://localhost:27017/gw2';

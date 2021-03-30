@@ -1,8 +1,8 @@
-const express = require('express');
-const account = require('../controllers/account');
-const catchAsync = require('../utils/catchAsync');
-const { hasCookie } = require('../middleware');
-const router = express.Router();
+const express       = require('express')
+const account       = require('../controllers/account')
+const catchAsync    = require('../utils/catchAsync')
+const { hasCookie } = require('../middleware')
+const router        = express.Router()
 
 // Bank
 router.route('/bank')
@@ -24,4 +24,4 @@ router.route('/dyes')
 router.route('/materials')
   .get(hasCookie, catchAsync(account.renderMaterialsInfo))
 
-module.exports = router;
+module.exports = router

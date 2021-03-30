@@ -1,14 +1,14 @@
-const titles = document.querySelectorAll('.itemName');
+const titles = document.querySelectorAll('.itemName')
 
-for (let title of titles) {
+for (const title of titles) {
   title.onclick = function () {
-    document.execCommand('copy');
+    document.execCommand('copy')
   }
 
   title.addEventListener('copy', function (event) {
-    event.preventDefault();
+    event.preventDefault()
     if (event.clipboardData) {
-      event.clipboardData.setData('text/plain', title.textContent);
+      event.clipboardData.setData('text/plain', title.textContent)
       console.log('maybe copied?')
     }
   })

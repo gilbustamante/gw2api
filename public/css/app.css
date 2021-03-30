@@ -1,77 +1,77 @@
 a {
-    color: rgb(10, 88, 202);
+  color: rgb(10, 88, 202);
 }
 
 a:hover {
-    color: rgb(118, 175, 255);
+  color: rgb(118, 175, 255);
 }
 
 body {
-    background: rgb(249, 251, 255);
-    color: rgb(48, 86, 131);
+  background: rgb(249, 251, 255);
+  color: rgb(48, 86, 131);
 }
 
 button.btn {
-    background: rgb(72, 107, 151);
-    color: rgb(249, 251, 255);
+  background: rgb(72, 107, 151);
+  color: rgb(249, 251, 255);
 }
 
 button.btn:active {
-    background: rgb(61, 101, 149);
-    color: rgb(249, 251, 255);
+  background: rgb(61, 101, 149);
+  color: rgb(249, 251, 255);
 }
 
 button.btn:hover {
-    background: rgb(48, 86, 131);
-    color: rgb(249, 251, 255);
+  background: rgb(48, 86, 131);
+  color: rgb(249, 251, 255);
 }
 
 li a.dropdown-item:active {
-    background: rgb(48, 86, 131);
+  background: rgb(48, 86, 131);
 }
 
 li.darkerBlue a.nav-link.active {
-    background: rgb(48, 86, 131);
+  background: rgb(48, 86, 131);
 }
 
 li.list-group-item {
-    background: rgb(249, 251, 255);
+  background: rgb(249, 251, 255);
 }
 
 
 li.list-group-item.warning {
-    background: rgba(255, 151, 151, 0.644);
+  background: rgba(255, 151, 151, 0.644);
 }
 
 nav#navBar {
-    background: rgb(48, 86, 131);
+  background: rgb(48, 86, 131);
 }
 
 span.itemName:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 span.itemName:active {
-    background:rgb(48, 86, 131);
-    color: rgb(255, 255, 255);
+  background:rgb(48, 86, 131);
+  color: rgb(255, 255, 255);
 }
 
 .boxShadow {
-    box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, .2);
+  box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, .2);
 }
 
 .currencyCard:hover {
-    background: rgb(249, 251, 255);
+  background: rgb(249, 251, 255);
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .muted {
-    opacity: 30%;
+  opacity: 30%;
 }
 
 .progress-bar {
-    background: rgb(48, 86, 131);
+  background: rgb(48, 86, 131);
 }

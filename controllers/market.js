@@ -3,8 +3,6 @@ const Item      = require('../models/item');
 const NodeCache = require('node-cache');
 const gw2cache  = new NodeCache();
 
-// TODO: add validation for apiKey
-
 module.exports.renderMarketHistory = async (req, res) => {
   try {
     // Sold items
@@ -224,7 +222,7 @@ module.exports.renderMarketLookup = async (req, res) => {
 }
 
 module.exports.MarketSearch = async (req, res) => {
-  // RegEx to let users case-insensitive partial search 
+  // RegEx to let users case-insensitive partial search
   const searchQuery = new RegExp(req.body.marketSearch, 'i');
   let foundItems = await Item.find({ name: searchQuery });
   if (foundItems.length > 50) {

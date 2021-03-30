@@ -8,12 +8,12 @@ module.exports.renderAPIForm = (req, res) => {
 
 // Handle API Key
 module.exports.handleAPI = async (req, res) => {
-	// Validate API key
-	const errors = validationResult(req);
-	if (errors.errors.length > 0) {
-		req.flash('error', 'Please enter a valid API key.')
-		return res.redirect('api');
-	}
+  // Validate API key
+  const errors = validationResult(req);
+  if (errors.errors.length > 0) {
+    req.flash('error', 'Please enter a valid API key.')
+    return res.redirect('api');
+  }
 
   // Clear current (if any) apiKey cookie
   res.clearCookie('apiKey');

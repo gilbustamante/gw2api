@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema   = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const AchievementSchema = new Schema({
   id: Number,
@@ -10,10 +10,10 @@ const AchievementSchema = new Schema({
   flags: [String],
   tiers: [
     {
-    count: Number,
-    points: Number
+      count: Number,
+      points: Number
     }
   ]
-});
+})
 
-module.exports = mongoose.model('Achievement', AchievementSchema);
+module.exports = mongoose.model('Achievement', AchievementSchema)

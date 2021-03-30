@@ -1,43 +1,43 @@
 // Populate database with currency details
 
-const mongoose = require('mongoose');
-const axios    = require('axios').default;
-const Recipe   = require('../models/recipe');
-const Item     = require('../models/item');
+const mongoose = require('mongoose')
+const axios    = require('axios').default
+const Recipe   = require('../models/recipe')
+const Item     = require('../models/item')
 
-const databaseUrl = process.env.DATABASE_URL || 'mongodb://localhost:27017/gw2';
+const databaseUrl = process.env.DATABASE_URL || 'mongodb://localhost:27017/gw2'
 mongoose.connect(databaseUrl, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
   useFindAndModify: false
-});
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+})
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', () => {
-  console.log('Database connected');
-});
+  console.log('Database connected')
+})
 
 const getDetails = async () => {
-  await Recipe.deleteMany({});
+  await Recipe.deleteMany({})
   console.log('Cleared recipe collection')
   // Request recipe details
   for (let i = 0; i < 63; i++) { // 63 pages as per arenanet's response header
     const url = `https://api.guildwars2.com/v2/recipes?page=${i}&page_size=200`
-    const res = await axios.get(url);
+    const res = await axios.get(url)
     // Create document for each recipe
-    for (let r of res.data) {
+    for (const r of res.data) {
       // TODO:
       // For some reason, 'GuildDecoration' recipes cause the object
       // creation to break so I'll figure out a real fix later.
       if (r.type === 'GuildDecoration') {
         console.log(`Ignoring 'GuildDecoration' recipe: ${r.id}`)
-        continue;
+        continue
       }
 
       // Create recipe object and save to database
       try {
-        const item = await Item.findOne({ id: r.output_item_id} );
+        const item = await Item.findOne({ id: r.output_item_id })
         const recipe = new Recipe({
           id: r.id,
           name: item.name,
@@ -50,13 +50,13 @@ const getDetails = async () => {
           flags: r.flags,
           ingredients: r.ingredients,
           chat_link: r.chat_link
-        });
+        })
 
         // Add each ingredient name and icon
-        for (let ingr of recipe.ingredients) {
+        for (const ingr of recipe.ingredients) {
           const ingredient = await Item.findOne({ id: ingr.item_id })
-          ingr.name = ingredient.name;
-          ingr.icon = ingredient.icon;
+          ingr.name = ingredient.name
+          ingr.icon = ingredient.icon
         }
 
         await recipe.save()
@@ -71,6 +71,6 @@ const getDetails = async () => {
 }
 
 getDetails().then(() => {
-  db.close();
+  db.close()
   console.log('Database disconnected')
-});
+})

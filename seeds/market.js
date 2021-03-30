@@ -18,6 +18,7 @@ db.once('open', () => {
 });
 
 const getIds = async () => {
+  // Clear DB
   await Item.deleteMany({});
   console.log('Cleared item collection')
   // Request item IDs
@@ -62,7 +63,7 @@ const getDetails = async () => {
   console.log('Done')
 }
 
-getDetails().then(() => {
-  mongoose.connection.close();
-  console.log('Database disconnected');
-});
+// getDetails().then(() => {
+//   mongoose.connection.close();
+//   console.log('Database disconnected');
+// });

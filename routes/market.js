@@ -1,8 +1,8 @@
-const express = require('express');
-const market = require('../controllers/market');
-const { hasCookie } = require('../middleware');
-const router = express.Router();
-const catchAsync = require('../utils/catchAsync');
+const express       = require('express')
+const market        = require('../controllers/market')
+const { hasCookie } = require('../middleware')
+const router        = express.Router()
+const catchAsync    = require('../utils/catchAsync')
 
 // Display Market Info
 router.route('/history')
@@ -15,4 +15,4 @@ router.route('/lookup')
   .get(hasCookie, catchAsync(market.renderMarketLookup))
   .post(hasCookie, catchAsync(market.MarketSearch))
 
-module.exports = router;
+module.exports = router
