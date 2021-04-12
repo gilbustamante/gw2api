@@ -2,6 +2,8 @@
 <h1>Crafting</h1>
 <hr>
 <p>Unlocked Recipes:</p>
+<input id="filterInput" class="form-control form-control-lg my-3" type="text" placeholder="Type to search"
+  aria-label="Search input" autofocus>
 <ul class="list-group-flush ps-0">
   <% for (let [id, recipe] of Object.entries(recipes)) { %>
     <li class="list-group-item">
@@ -11,7 +13,7 @@
         </div>
         <div class="col">
           <p class="m-0">
-            <strong><a href="https://wiki.guildwars2.com/wiki/<%= recipe.name %>"><%= recipe.name %></a></strong> (<%= recipe.min_rating %>)
+            <strong><a class="itemTitle" href="https://wiki.guildwars2.com/wiki/<%= recipe.name %>"><%= recipe.name %></a></strong> (<%= recipe.min_rating %>)
           </p>
           <div class="table-responsive">
             <p class="mb-0"><%= recipe.disciplines.join(', ') %></p>
@@ -37,3 +39,4 @@
     </li>
   <% } %> 
 </ul>
+<script src="/js/filterSearch.js"></script>
