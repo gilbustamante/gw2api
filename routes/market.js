@@ -11,8 +11,4 @@ router.route('/history')
 router.route('/current')
   .get(hasCookie, catchAsync(market.renderMarketCurrent))
 
-router.route('/lookup')
-  .get(hasCookie, catchAsync(market.renderMarketLookup))
-  .post(hasCookie, catchAsync(market.MarketSearch))
-
 module.exports = router

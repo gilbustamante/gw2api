@@ -3,6 +3,8 @@ const Achievement = require('../models/achievement');
 const NodeCache = require('node-cache');
 const gw2Cache = new NodeCache();
 
+// TODO: Refactor this stuff
+
 module.exports.renderDailies = async (req, res) => {
   // Today's Quests Endpoint
   const dailyUrl = 'https://api.guildwars2.com/v2/achievements/daily?v=2019-05-16T00:00:00.000Z';

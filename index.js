@@ -2,15 +2,15 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-const express      = require('express');
-const session      = require('express-session');
-const cookieParser = require('cookie-parser');
-const path         = require('path');
-const ejsMate      = require('ejs-mate');
-const ExpressError = require('./utils/ExpressError');
-const flash        = require('connect-flash');
-const mongoose     = require('mongoose');
-const app          = express();
+const express                     = require('express');
+const session                     = require('express-session');
+const cookieParser                = require('cookie-parser');
+const path                        = require('path');
+const ejsMate                     = require('ejs-mate');
+const ExpressError                = require('./utils/ExpressError');
+const flash                       = require('connect-flash');
+const mongoose                    = require('mongoose');
+const app                         = express();
 
 // Scripts
 const { convertGold, convertNum } = require('./public/js/convertGold');
@@ -18,10 +18,10 @@ const { totalGold }               = require('./public/js/totalGold');
 const { format }                  = require('timeago.js'); // Time formatting
 
 // Requiring Routes
-const achievementRoutes = require('./routes/achievements');
-const marketRoutes      = require('./routes/market');
-const apiRoutes         = require('./routes/api');
-const accountRoutes     = require('./routes/account');
+const achievementRoutes           = require('./routes/achievements');
+const marketRoutes                = require('./routes/market');
+const apiRoutes                   = require('./routes/api');
+const accountRoutes               = require('./routes/account');
 
 // Database setup
 const database = process.env.DATABASE_URL || 'mongodb://localhost:27017/gw2';

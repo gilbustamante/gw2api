@@ -215,18 +215,3 @@ module.exports.renderMarketCurrent = async (req, res) => {
   res.render('market/current', { sell, sellDict, buy, buyDict, delivery })
 }
 
-module.exports.renderMarketLookup = async (req, res) => {
-  // Need to declare and send empty `items` so lookup page doesn't complain
-  let items;
-  res.render('market/lookup', { items })
-}
-
-module.exports.MarketSearch = async (req, res) => {
-  // RegEx to let users case-insensitive partial search
-  const searchQuery = new RegExp(req.body.marketSearch, 'i');
-  let foundItems = await Item.find({ name: searchQuery });
-  if (foundItems.length > 50) {
-    foundItems = foundItems.slice(0, 50)
-  }
-  res.render('market/lookup', { items: foundItems })
-}
