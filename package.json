@@ -28,7 +28,6 @@
     "express-validator": "^6.10.0",
     "mongoose": "^5.11.14",
     "node-cache": "^5.1.2",
-    "redis": "^3.0.2",
     "timeago.js": "^4.0.2"
   }
 }
