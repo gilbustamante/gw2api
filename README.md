@@ -1,4 +1,7 @@
 # Guild Wars 2 Web Companion
+
+### **UPDATE: I have since ported this app to Python. [The new app](https://github.com/gilbustamante/tpw) features a more secure solution for storing the user's API key.**
+
 Simple web app that keeps track of things the average [GW2](https://www.guildwars2.com) player cares about. I wrote this to practice working with Node.js and APIs so there may be some (hopefully temporary) rookie mistakes or suboptimal code herein.
 ### Features
 * Accepts a GW2 public API key and stores it as a signed cookie (30 days) for convenience.
